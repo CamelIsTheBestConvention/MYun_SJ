@@ -4,8 +4,8 @@ import Regmsg from "../common/regmsg";
 interface InputProps {
     type: string;
     placeholder?: string;
-    value?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     title: string;
     msg: string
 }
@@ -15,7 +15,7 @@ const SignupInput:React.FC<InputProps> = ({ type, placeholder, value, onChange, 
         <>
             <SignupInputBox>
                 <SignupInputTitle>{title}</SignupInputTitle>
-                <SignInput type={type} placeholder={placeholder} />
+                <SignInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
                 <Regmsg msg={msg} />
             </SignupInputBox>
         </>

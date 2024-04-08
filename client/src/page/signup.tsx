@@ -12,6 +12,14 @@ const Signup = () => {
     const [pw, setPw] = useState('');
     const [pwcheck, setPwcheck] = useState('');
 
+    useEffect(() => {
+        console.log('이메일', email);
+        console.log('이름', name);
+        console.log('닉네임', nickname);
+        console.log('비번', pw);
+        console.log('비번확인', pwcheck);
+    }, [email, name, nickname, pw, pwcheck]);
+
     return (
         <>
             <form>
@@ -22,31 +30,46 @@ const Signup = () => {
                     placeholder="myun@test.com"
                     title="이메일"
                     msg="메일"
-                    value={email} />
+                    value={email}
+                    onChange={(e) => {
+                        setEmail(e.target.value)
+                    }} />
                 <SignupInputBox
                     type="text"
                     placeholder="문성준"
                     title="이름"
                     msg="이름"
-                    value={name} />
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }} />
                 <SignupInputBox
                     type="text"
                     placeholder="문미새"
                     title="닉네임"
                     msg="닉네임"
-                    value={nickname} />
+                    value={nickname}
+                    onChange={(e) => {
+                        setNickname(e.target.value)
+                    }} />
                 <SignupInputBox
                     type="password"
                     placeholder="비밀번호를 입력해주세요."
                     title="비밀번호"
                     msg="비번"
-                    value={pw} />
+                    value={pw}
+                    onChange={(e) => {
+                        setPw(e.target.value)
+                    }} />
                 <SignupInputBox
                     type="password"
                     placeholder="비밀번호를 확인해주세요."
                     title="비밀번호 확인"
                     msg="비번확인"
-                    value={pwcheck} />
+                    value={pwcheck}
+                    onChange={(e) => {
+                        setPwcheck(e.target.value)
+                    }} />
                 <Btn color="black" fontColor="white" btnText="회원가입" />
             </form>
         </>
