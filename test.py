@@ -1,39 +1,9 @@
-# import sys
-# input = sys.stdin.readline
+from itertools import permutations
 
-# word = input().strip()
-# n = int(input())
-# cursor = len(word)
-# print(cursor)
+N, M = map(int, input().split())
+numbers = sorted(list(map(int, input().split())))
 
-# for i in range(n):
-#     inputs = input().strip().split()
-#     command = inputs[0]
-    
-#     if len(inputs) > 1:
-#         char = inputs[1]
-#     else:
-#         char = None
-    
-#     # if command == 'P':
+result_set = list(permutations(numbers, M))
 
-import sys
-
-left_stack = list(input().strip())
-right_stack = []
-n = int(input())
-
-for _ in range(n):
-    command = sys.stdin.readline().strip().split()
-    
-    if command[0] == 'L' and left_stack:
-        right_stack.append(left_stack.pop())
-    elif command[0] == 'D' and right_stack:
-        left_stack.append(right_stack.pop())
-    elif command[0] == 'B' and left_stack:
-        left_stack.pop()
-    elif command[0] == 'P':
-        left_stack.append(command[1])
-
-result = ''.join(left_stack + right_stack[::-1])
-print(result)
+for seq in sorted(result_set):
+    print(' '.join(map(str, seq)))
