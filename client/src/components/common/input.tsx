@@ -16,6 +16,8 @@ const Input:React.FC<InputProps> = ({ type, placeholder, value, onChange }) => {
                 <InputMain
                     type={type}
                     placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
                 />
             </InputBox>
         </>

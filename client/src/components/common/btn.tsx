@@ -1,10 +1,17 @@
 import styled from "styled-components"
 
-const Btn:React.FC<{color: string; fontColor: string; btnText: string}> = ({color, fontColor, btnText}) => {
+interface BtnProps {
+    type: "button" | "submit";
+    color: string;
+    fontColor: string;
+    btnText: string;
+}
+
+const Btn:React.FC<BtnProps> = ({type, color, fontColor, btnText}) => {
     return (
         <>
             <BtnBox>
-                <BtnBtn color={color} fontColor={fontColor}>{btnText}</BtnBtn>
+                <BtnBtn type={type} color={color} fontColor={fontColor}>{btnText}</BtnBtn>
             </BtnBox>
         </>
     )
@@ -25,7 +32,3 @@ const BtnBtn = styled.button<{color: string; fontColor: string}>`
     color: ${(props) => props.fontColor};
     border: 1px solid black;
 `
-
-
-
-
