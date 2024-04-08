@@ -19,10 +19,11 @@ const BtnBox = styled.div`
 const BtnBtn = styled.button<{color: string; fontColor: string}>`
     width: 100%;
     margin-bottom: 10px;
-    padding: 10px 0;
+    padding: 15px 0;
     background-color: ${(props) => props.color};
     cursor: pointer;
     color: ${(props) => props.fontColor};
+    border: 1px solid black;
 `
 
 

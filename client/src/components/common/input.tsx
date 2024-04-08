@@ -34,4 +34,8 @@ const InputMain = styled.input`
     border-bottom: 2px solid #ECECEC;
     padding: 10px 0;
     font-size: 16px;
+    
+    &:focus {
+        outline: none;
+    }
 `
