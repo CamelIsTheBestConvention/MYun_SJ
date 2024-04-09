@@ -3,7 +3,7 @@ import Btn from "../components/common/btn"
 import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"
 import SignupInputBox from "../components/signup/signupInput"
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 
 
 const Signup = () => {
@@ -19,11 +19,10 @@ const Signup = () => {
     const [pwValid, setPwValid] = useState(false);
     const [pwcheckValid, setPwcheckValid] = useState(false);
 
-    const emailRegex = /\S+@\S+\.\S+/;
-    const nameRegex = /^[가-힣]+$/;
-    const nicknameRegex = /^[a-zA-Z0-9가-힣]+$/;
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    const pwcheckRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const emailRegex = /\S+@\S+\.\S{2,3}$/;
+    const nameRegex = /^[가-힣]{2,5}$/;
+    const nicknameRegex = /^[a-zA-Z0-9가-힣]{3,10}$/;
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*])(?=.{8,16})[A-Za-z\d!@#$%^&*]{8,16}$/;
 
     // useEffect(() => {
     //     console.log('이메일', email);
@@ -35,6 +34,11 @@ const Signup = () => {
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
+
+        if (!emailValid || !nameValid || !nicknameValid || !pwValid || !pwcheckValid) {
+            alert("입력한 정보를 다시 확인해 주세요.");
+            return;
+        }
 
         const formData = {
             email,

@@ -2,7 +2,7 @@ import Btn from "../components/common/btn"
 import Input from "../components/common/input"
 import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 
