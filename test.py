@@ -1,16 +1,16 @@
-def min_operations(A, B):
-    count = 0
-    while B > A:
-        if B % 2 == 0:
-            B //= 2
-        elif str(B)[-1] == '1':
-            B = int(str(B)[:-1])
-        else:
-            return -1
-        count += 1
-
-    return count + 1 if B == A else -1
-
-A, B = map(int, input().split())
-
-print(min_operations(A, B))
+n = 7
+def solution(n):
+    answer = 0
+    a = 1
+    while True:
+        for i in range(1,n+1):
+            a *= i
+            print(a)
+            answer += 1
+            if a > n:
+                return answer - 1
+            if a == n:
+                return answer
+        break
+    return answer-1
+print(solution(n))
