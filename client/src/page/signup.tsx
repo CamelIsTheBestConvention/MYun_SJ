@@ -112,7 +112,7 @@ const Signup = () => {
                         setPwcheck(e.target.value)
                         setPwcheckValid(pw === e.target.value);
                     }} />
-                <Btn type="submit" color="black" fontColor="white" btnText="회원가입" />
+                <Btn type="submit" color="black" fontcolor="white" btnText="회원가입" />
             </form>
         </>
     )
