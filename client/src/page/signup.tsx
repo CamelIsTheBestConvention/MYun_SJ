@@ -59,7 +59,7 @@ const Signup = () => {
             console.error('회원가입 에러:', error);
         }
     };
-    
+
     return (
         <>
             <form onSubmit={handleSubmit}>
