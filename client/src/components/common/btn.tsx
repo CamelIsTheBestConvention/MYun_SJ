@@ -3,15 +3,15 @@ import styled from "styled-components"
 interface BtnProps {
     type: "button" | "submit";
     color: string;
-    fontColor: string;
+    fontcolor: string;
     btnText: string;
 }
 
-const Btn:React.FC<BtnProps> = ({type, color, fontColor, btnText}) => {
+const Btn:React.FC<BtnProps> = ({type, color, fontcolor, btnText}) => {
     return (
         <>
             <BtnBox>
-                <BtnBtn type={type} color={color} fontColor={fontColor}>{btnText}</BtnBtn>
+                <BtnBtn type={type} color={color} fontcolor={fontcolor}>{btnText}</BtnBtn>
             </BtnBox>
         </>
     )
@@ -23,12 +23,12 @@ const BtnBox = styled.div`
     margin: 0 auto;
 `
 
-const BtnBtn = styled.button<{color: string; fontColor: string}>`
+const BtnBtn = styled.button<{color: string; fontcolor: string}>`
     width: 100%;
     margin-bottom: 10px;
     padding: 15px 0;
     background-color: ${(props) => props.color};
     cursor: pointer;
-    color: ${(props) => props.fontColor};
+    color: ${(props) => props.fontcolor};
     border: 1px solid black;
 `

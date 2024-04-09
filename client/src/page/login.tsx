@@ -39,10 +39,10 @@ const Login = () => {
                 <Input type="password" placeholder="비밀번호" onChange={(e) => {
                         setPw(e.target.value)
                     }} />
-                <Btn type="submit" color="black" fontColor="white" btnText="LOGIN"/>
+                <Btn type="submit" color="black" fontcolor="white" btnText="LOGIN"/>
             </form>
             <a href="/signup">
-                <Btn type="button" color="white" fontColor="black" btnText="SIGNUP" />
+                <Btn type="button" color="white" fontcolor="black" btnText="SIGNUP" />
             </a>
         </>
     )

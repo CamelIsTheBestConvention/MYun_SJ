@@ -3,7 +3,7 @@ const session = require('express-session');
 const sequelize = require('./config/db');
 const User = require('./models/user');
 const Post = require('./models/post');
-const authMiddleware = require('./middlewares/authMiddleware'); // authMiddleware import
+const authMiddleware = require('./middlewares/authMiddleware');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
