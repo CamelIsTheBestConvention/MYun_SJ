@@ -1,9 +1,16 @@
-from itertools import permutations
+def min_operations(A, B):
+    count = 0
+    while B > A:
+        if B % 2 == 0:
+            B //= 2
+        elif str(B)[-1] == '1':
+            B = int(str(B)[:-1])
+        else:
+            return -1
+        count += 1
 
-N, M = map(int, input().split())
-numbers = sorted(list(map(int, input().split())))
+    return count + 1 if B == A else -1
 
-result_set = list(permutations(numbers, M))
+A, B = map(int, input().split())
 
-for seq in sorted(result_set):
-    print(' '.join(map(str, seq)))
+print(min_operations(A, B))

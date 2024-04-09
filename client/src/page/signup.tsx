@@ -32,7 +32,7 @@ const Signup = () => {
     //     console.log('비번확인', pwcheck);
     // }, [email, name, nickname, pw, pwcheck]);
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
 
         if (!emailValid || !nameValid || !nicknameValid || !pwValid || !pwcheckValid) {
@@ -47,16 +47,19 @@ const Signup = () => {
             pw
         };
 
-        axios.post('localhost:5000/signup', formData)
-            .then(response => {
-                alert('회원가입 성공!');
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('회원가입 에러:', error);
+        try {
+            const response = await axios.post('http://localhost:5000/api/users', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+            alert('회원가입 성공!');
+            console.log(response.data);
+        } catch (error) {
+            console.error('회원가입 에러:', error);
+        }
     };
-
+    
     return (
         <>
             <form onSubmit={handleSubmit}>
