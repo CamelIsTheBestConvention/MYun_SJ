@@ -4,6 +4,7 @@ import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"
 import SignupInputBox from "../components/signup/signupInput"
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -21,7 +22,7 @@ const Signup = () => {
 
     const emailRegex = /\S+@\S+\.\S{2,3}$/;
     const nameRegex = /^[가-힣]{2,5}$/;
-    const nicknameRegex = /^[a-zA-Z0-9가-힣]{3,10}$/;
+    const nicknameRegex = /^[a-zA-Z0-9가-힣]{2,6}$/;
     const pwRegex = /^(?=.*[A-Za-z])(?=.*[!@#$%^&*])(?=.{8,16})[A-Za-z\d!@#$%^&*]{8,16}$/;
 
     // useEffect(() => {
@@ -31,6 +32,8 @@ const Signup = () => {
     //     console.log('비번', pw);
     //     console.log('비번확인', pwcheck);
     // }, [email, name, nickname, pw, pwcheck]);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
@@ -55,6 +58,8 @@ const Signup = () => {
             });
             alert('회원가입 성공!');
             console.log(response.data);
+
+            navigate('/login');
         } catch (error) {
             console.error('회원가입 에러:', error);
         }

@@ -17,4 +17,5 @@ export default PostWrapper
 const PostWrapperBox = styled.div`
     width: 92%;
     margin: 0 auto;
+    display: flex;
 `

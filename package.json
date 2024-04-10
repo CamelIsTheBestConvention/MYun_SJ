@@ -16,6 +16,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "choco": "^0.2.1",
     "dotenv": "^16.4.5"
   }
 }
