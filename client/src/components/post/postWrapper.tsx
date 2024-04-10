@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import PostLeft from "./postLeft"
 import PostRight from "./postRight"
+import PostSidebar from "./postSidebar"
 
 const PostWrapper = () => {
     return (
@@ -8,6 +9,7 @@ const PostWrapper = () => {
             <PostWrapperBox>
                 <PostLeft />
                 <PostRight />
+                <PostSidebar />
             </PostWrapperBox>
         </>
     )

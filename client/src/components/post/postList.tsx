@@ -1,16 +1,24 @@
-const PostList = () => {
+import PostImgImg from "../../img/misaemococo.png"
+import "../../style/post/postList.scss"
+
+interface postList {
+    postH2: string; 
+    postContent: string;
+}
+
+const PostList:React.FC<postList> = ({postH2, postContent}) => {
     return (
         <>
-            <div>
-                <div>
-                    <h2>문미새제목</h2>
-                    <div>
-                        <span>문미새 내용</span>
+            <div className="postList-box">
+                <div className="postList-text">
+                    <h2>{postH2}</h2>
+                    <div className="postList-content">
+                        <span>{postContent}</span>
                     </div>
                 </div>
 
-                <div>
-                    <img src="" alt="" />
+                <div className="postList-img-box">
+                    <img src={PostImgImg} alt="" />
                 </div>
             </div>
         </>

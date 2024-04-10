@@ -1,0 +1,31 @@
+.postList-box {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+.postList-text {
+    width: 75%;
+    margin: 10px 0;
+    h2 {
+        border-bottom: 1px solid black;
+        padding-bottom: 10px;
+    }
+}
+
+.postList-content {
+    margin-top: 5px;
+    span {
+        font-size: 17px;
+    }
+}
+
+.postList-img-box {
+    width: 130px;
+    margin: 10px 0;
+
+    img {
+        width: inherit;
+    }
+}

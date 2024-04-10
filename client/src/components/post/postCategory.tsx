@@ -6,11 +6,11 @@ const PostCategory = () => {
             <div className="post-category-box">
                 <p className="post-category-title">카테고리</p>
                 <ul className="post-category-list">
-                    <li>윤세진</li>
-                    <li>세진윤</li>
-                    <li>진세윤</li>
-                    <li>진윤세</li>
-                    <li>윤진세</li>
+                    <li>크래프톤 정글 ▶</li>
+                    <li>프론트 엔드</li>
+                    <li>백 엔드</li>
+                    <li>TIL</li>
+                    <li>로스트아크</li>
                 </ul>
             </div>
         </>
