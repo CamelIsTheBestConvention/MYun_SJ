@@ -12,6 +12,7 @@
     "@types/node": "^16.18.94",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
+    "@types/three": "^0.163.0",
     "axios": "^1.6.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +24,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    // "start": "cross-env HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem PORT=3333 react-scripts start",
     "start": "set PORT=3333 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
