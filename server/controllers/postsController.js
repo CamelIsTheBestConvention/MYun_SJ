@@ -12,7 +12,7 @@ const postsController = {
     },
 
     // 게시글 생성
-    createPost: async (req, res) => {
+    createPost: async (req, res) => {   
         try {
             const post = await Post.create(req.body);
             res.status(201).json(post);
