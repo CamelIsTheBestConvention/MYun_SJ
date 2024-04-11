@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 const usersController = {
@@ -14,7 +15,9 @@ const usersController = {
     // 사용자 생성
     createUser: async (req, res) => {
         try {
-            const user = await User.create(req.body);
+            const { username, password } = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10); // 비밀번호 해싱
+            const user = await User.create({ username, password: hashedPassword });
             res.status(201).json(user);
         } catch (error) {
             res.status(400).json({ message: error.message });
