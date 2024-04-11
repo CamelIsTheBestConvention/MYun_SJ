@@ -18,6 +18,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.12",
     "choco": "^0.2.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
