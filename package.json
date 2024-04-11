@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "choco": "^0.2.1",
-    "dotenv": "^16.4.5"
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "save-dev": "^0.0.1-security"
   }
 }
