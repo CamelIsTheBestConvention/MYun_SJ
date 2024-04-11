@@ -21,7 +21,7 @@ const Login = (e:any) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users', formData, {
+            const response = await axios.post('https://localhost:5000/api/users', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
