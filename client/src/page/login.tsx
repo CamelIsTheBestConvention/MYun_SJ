@@ -4,13 +4,15 @@ import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"
 import React, {useState} from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 
-const Login = () => {
+const Login = (e:any) => {
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
 
         const formData = {
@@ -18,14 +20,20 @@ const Login = () => {
             pw
         };
 
-        axios.post('localhost:5000/login', formData)
-            .then(response => {
-                alert('로그인 성공!');
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('로그인 에러:', error);
+        try {
+            const response = await axios.post('http://localhost:5000/api/users', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+            alert('로그인했습니다.');
+            console.log(response.data);
+
+            navigate('/post');
+        } catch (error) {
+            console.log('로그인 실패:', error);
+        }
+        
     };
 
     return (
