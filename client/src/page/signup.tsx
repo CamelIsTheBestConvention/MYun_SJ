@@ -38,10 +38,10 @@ const Signup = () => {
     const handleSubmit = async (e:any) => {
         e.preventDefault();
 
-        if (!emailValid || !nameValid || !nicknameValid || !pwValid || !pwcheckValid) {
-            alert("입력한 정보를 다시 확인해 주세요.");
-            return;
-        }
+        // if (!emailValid || !nameValid || !nicknameValid || !pwValid || !pwcheckValid) {
+        //     alert("입력한 정보를 다시 확인해 주세요.");
+        //     return;
+        // }
 
         const formData = {
             email,

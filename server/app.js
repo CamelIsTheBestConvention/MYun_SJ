@@ -4,13 +4,10 @@ const sequelize = require('./config/db');
 const User = require('./models/user');
 const Post = require('./models/post');
 const authMiddleware = require('./middlewares/authMiddleware');
-const fs = require('fs');
-const https = require('https');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const privateKey = fs.readFileSync('server.key', 'utf8');
-const certificate = fs.readFileSync('server.cert', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
+
 const postsRoutes = require('./routes/posts');
 const usersRoutes = require('./routes/users');
 
@@ -44,8 +41,4 @@ sequelize.sync()
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-// HTTPS 서버 설정
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(PORT, () => {
-    console.log(`HTTPS Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
