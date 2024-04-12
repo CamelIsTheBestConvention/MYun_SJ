@@ -8,14 +8,13 @@ import upArrow from "../../img/upArrow.png"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-
 const PostSidebar = () => {
     const navigate = useNavigate();
 
     const logoutfunc = async (e:any) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/users/logout', {}, { // Use POST and send an empty object as the body
+            const response = await axios.post('http://localhost:5000/api/users/logout', {}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
