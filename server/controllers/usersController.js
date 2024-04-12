@@ -74,7 +74,7 @@ const usersController = {
                 return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
             }
 
-            // 비밀번호 검증 로직 추가, 예시로는 일치 여부만 확인
+            // 비밀번호 검증 로직 추가 일치 여부만 확인
             if (user.pw !== pw) {
                 return res.status(400).json({ message: '잘못된 비밀번호입니다.' });
             }
@@ -82,6 +82,22 @@ const usersController = {
             // 세션에 사용자 ID 저장
             req.session.userId = user.id;
             res.json({ message: '로그인 성공!' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    // 사용자 로그아웃
+    logoutUser: async (req, res) => {
+        try {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).json({ message: '로그아웃 에러' });
+                } else {
+                    res.json({ message: '로그아웃 성공' });
+                }
+            });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

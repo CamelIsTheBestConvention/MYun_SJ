@@ -20,4 +20,7 @@ router.delete('/:id', usersController.deleteUser);
 // 사용자 로그인을 처리하는 POST 요청
 router.post('/login', usersController.loginUser);
 
+// 사용자 로그아웃을 처리하는 POST 요청
+router.post('/logout', usersController.logoutUser);
+
 module.exports = router;
