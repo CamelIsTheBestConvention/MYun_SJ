@@ -7,7 +7,7 @@ const Post = () => {
     return (
         <>
             <LogoImg />
-            <PostTitle />
+            <PostTitle mainText="P O S T" subText="게시판" />
             <PostWrapper />
         </>
     )
