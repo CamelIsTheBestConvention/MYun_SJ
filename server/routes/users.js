@@ -17,4 +17,7 @@ router.put('/:id', usersController.updateUser);
 // 특정 사용자를 삭제하는 DELETE 요청
 router.delete('/:id', usersController.deleteUser);
 
+// 사용자 로그인을 처리하는 POST 요청
+router.post('/login', usersController.loginUser);
+
 module.exports = router;
