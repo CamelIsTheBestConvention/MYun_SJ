@@ -1,21 +1,29 @@
 const express = require('express');
+const app = express();
+const cors = require('cors');
 const session = require('express-session');
+require('dotenv').config();
+
 const sequelize = require('./config/db');
+
 const User = require('./models/user');
 const Post = require('./models/post');
-const authMiddleware = require('./middlewares/authMiddleware');
-
-const app = express();
-const PORT = process.env.PORT || 5000;
 
 const postsRoutes = require('./routes/posts');
 const usersRoutes = require('./routes/users');
 
-require('dotenv').config();
+app.use(cors());
 
-// 미들웨어 설정
+app.use((req, res, next) => {
+    res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    res.header('Expires', '0');
+    next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
     secret: process.env.SESSION_KEY,
     resave: false,
@@ -23,22 +31,16 @@ app.use(session({
     cookie: { secure: 'auto' }
 }));
 
-// CORS 미들웨어 설정 (옵션)
-const cors = require('cors');
-app.use(cors());
+app.use('/api/posts', postsRoutes);
+app.use('/api/users', usersRoutes);
 
-// 라우트 사용, authMiddleware를 특정 경로에 적용
-app.use('/api/posts', authMiddleware, postsRoutes); // posts 경로에 authMiddleware 적용
-app.use('/api/users', usersRoutes); // users 경로에는 authMiddleware를 적용하지 않음
-
-sequelize.authenticate()
-    .then(() => console.log('Database connected...'))
-    .catch(err => console.log('Error: ' + err));
-
-sequelize.sync()
-    .then(() => console.log('Tables created...'))
-    .catch(err => console.log('Error: ' + err));
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    sequelize.authenticate().then(() => {
+        console.log('Database connected...');
+        sequelize.sync().then(() => {
+            console.log('Tables created...');
+        }).catch(err => console.log('Error: ' + err));
+    }).catch(err => console.log('Error: ' + err));
+});

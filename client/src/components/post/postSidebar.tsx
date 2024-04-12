@@ -11,22 +11,22 @@ import { useNavigate } from 'react-router-dom';
 const PostSidebar = () => {
     const navigate = useNavigate();
 
-    const logoutfunc = async (e:any) => {
-        e.preventDefault();
+    const logoutfunc = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/users/logout', {}, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            alert('로그아웃했습니다.');
-            console.log(response.data);
+            const response = await axios.post('http://localhost:5000/api/users/logout');
+            if (response.data.message === '로그아웃 성공') {
+                // 클라이언트 측 인증 정보 삭제
+                localStorage.removeItem('userToken');
+                sessionStorage.clear();
     
-            navigate('/login');
+                // 사용자를 로그인 페이지로 리디렉션
+                window.location.href = '/login';
+            }
         } catch (error) {
             console.error('로그아웃 에러:', error);
         }
     };
+    
     
 
     return (
