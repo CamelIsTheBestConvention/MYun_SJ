@@ -16,7 +16,7 @@ const PostRight = () => {
 export default PostRight
 
 const PostListBox = styled.div`
-    width: 700px;
+    width: 57vw;
     background-color: #f4f4f4;
     margin: 20px;
 `

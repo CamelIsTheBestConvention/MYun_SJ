@@ -1,5 +1,5 @@
 import "../../style/post/postSidebar.scss"
-import mypage from "../../img/mypage.png"
+import write from "../../img/write.png"
 import setting from "../../img/gear.png"
 import cube from "../../img/cube.png"
 import logout from "../../img/logout.png"
@@ -13,7 +13,9 @@ const PostSidebar = () => {
                 <div className="postSidebar-inner">
                     <p>문미새</p>
                     <div className="postSidebar-icon">
-                        <img src={mypage} alt="" />
+                        <a href="/write">
+                            <img src={write} alt="" />
+                        </a>
                         <img src={setting} alt="" />
                     </div>
                     <div className="postSidebar-icon">
