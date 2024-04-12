@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Btn from "../components/common/btn"
 import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"
@@ -35,21 +35,15 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // if (!emailValid || !nameValid || !nicknameValid || !pwValid || !pwcheckValid) {
-        //     alert("입력한 정보를 다시 확인해 주세요.");
-        //     return;
-        // }
-
         const formData = {
             email,
             name,
             nickname,
             pw
         };
-
+    
         try {
             const response = await axios.post('http://localhost:5000/api/users', formData, {
                 headers: {
@@ -58,13 +52,21 @@ const Signup = () => {
             });
             alert('회원가입 성공!');
             console.log(response.data);
-
             navigate('/login');
-        } catch (error) {
+        } catch (error: unknown) {
             console.error('회원가입 에러:', error);
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    alert(`회원가입 실패: ${error.response.data.message || '서버 에러가 발생했습니다.'}`);
+                } else {
+                    alert('네트워크 에러 또는 서버가 응답하지 않습니다.');
+                }
+            } else {
+                alert('알 수 없는 에러가 발생했습니다.');
+            }
         }
     };
-
+    
     return (
         <>
             <form onSubmit={handleSubmit}>

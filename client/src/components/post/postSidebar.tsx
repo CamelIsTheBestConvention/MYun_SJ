@@ -41,7 +41,7 @@ const PostSidebar = () => {
                         </a>
                         <a href="#">
                             <img src={setting} alt="" />
-                            <p>setting</p>
+                            <p>settings</p>
                         </a>
                     </div>
                     <div className="postSidebar-icon">
