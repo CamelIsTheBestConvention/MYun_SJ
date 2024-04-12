@@ -21,7 +21,7 @@ const Login = (e:any) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users', formData, {
+            const response = await axios.post('http://localhost:5000/api/users/login', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -31,6 +31,7 @@ const Login = (e:any) => {
 
             navigate('/post');
         } catch (error) {
+            alert('없는 계정이거나 비밀번호가 틀렸습니다. 다시 시도해주세요.');
             console.log('로그인 실패:', error);
         }
         
