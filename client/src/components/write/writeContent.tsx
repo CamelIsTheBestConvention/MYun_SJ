@@ -1,8 +1,12 @@
 import { useRef } from "react"
 import "../../style/write/writeContent.scss"
 
-const WriteContent = () => {
-    const textareaRef = useRef<HTMLTextAreaElement>(null); // 타입 명시 추가
+interface WriteContentProps {
+    imagePreview: string | null;
+}
+
+const WriteContent: React.FC<WriteContentProps> = ({ imagePreview }) => {
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleResizeHeight = () => {
         if (textareaRef.current) {
@@ -19,7 +23,9 @@ const WriteContent = () => {
                     rows={11}
                     placeholder="내용을 입력하세요."
                     onChange={handleResizeHeight}
-                ></textarea>
+                >
+                {imagePreview && <img src={imagePreview} alt="Preview" />}
+                </textarea>
             </div>
         </>
     )
