@@ -85,6 +85,22 @@ const usersController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+
+    // 사용자 로그아웃
+    logoutUser: async (req, res) => {
+        try {
+            req.session.destroy((err) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).json({ message: '로그아웃 에러' });
+                } else {
+                    res.json({ message: '로그아웃 성공' });
+                }
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 };
 
