@@ -11,16 +11,26 @@ const PostSidebar = () => {
         <>
             <div className="postSidebar-box">
                 <div className="postSidebar-inner">
-                    <p>문미새</p>
+                    <p className="postSidebar-inner-nickname">문미새</p>
                     <div className="postSidebar-icon">
                         <a href="/write">
                             <img src={write} alt="" />
+                            <p>write</p>
                         </a>
-                        <img src={setting} alt="" />
+                        <a href="#">
+                            <img src={setting} alt="" />
+                            <p>setting</p>
+                        </a>
                     </div>
                     <div className="postSidebar-icon">
-                        <img src={cube} alt="" />
-                        <img src={logout} alt="" />
+                        <a href="#">
+                            <img src={cube} alt="" />
+                            <p>cube</p>
+                        </a>
+                        <a href="#">
+                            <img src={logout} alt="" />
+                            <p>logout</p>
+                        </a>
                     </div>
                     <div className="postSidebar-arrow">
                         <img src={upArrow} alt="" />

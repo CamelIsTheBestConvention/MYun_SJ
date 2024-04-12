@@ -1,7 +1,9 @@
 const Write = () => {
     return (
         <>
-            
+            <div>
+                
+            </div>
         </>
     )
 }
