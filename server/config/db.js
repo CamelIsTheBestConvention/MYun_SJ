@@ -8,7 +8,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 });
 
 sequelize.authenticate()
-    .then(() => console.log('Connection has been established successfully.'))
-    .catch(err => console.error('Unable to connect to the database:', err));
+    .then(() => console.log('연결이 성공적으로 설정되었습니다.'))
+    .catch(err => console.error('데이터베이스에 연결할 수 없습니다.:', err));
 
 module.exports = sequelize;
