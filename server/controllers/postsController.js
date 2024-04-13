@@ -28,7 +28,7 @@ const postsController = {
             if (post) {
                 res.json(post);
             } else {
-                res.status(404).json({ message: 'Post not found' });
+                res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -43,7 +43,7 @@ const postsController = {
                 await post.update(req.body);
                 res.json(post);
             } else {
-                res.status(404).json({ message: 'Post not found' });
+                res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(400).json({ message: error.message });
@@ -58,7 +58,7 @@ const postsController = {
                 await post.destroy();
                 res.status(204).send();
             } else {
-                res.status(404).json({ message: 'Post not found' });
+                res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(500).json({ message: error.message });

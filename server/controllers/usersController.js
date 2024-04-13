@@ -28,7 +28,7 @@ const usersController = {
             if (user) {
                 res.json(user);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -43,7 +43,7 @@ const usersController = {
                 await user.update(req.body);
                 res.json(user);
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(400).json({ message: error.message });
@@ -58,7 +58,7 @@ const usersController = {
                 await user.destroy();
                 res.status(204).send();
             } else {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
             }
         } catch (error) {
             res.status(500).json({ message: error.message });
