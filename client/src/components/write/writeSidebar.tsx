@@ -1,10 +1,30 @@
-import "../../style/write/writeSidebar.scss"
-import pen from "../../img/pen.png"
-import file from "../../img/file.png"
-import downArrow from "../../img/downArrow.png"
-import upArrow from "../../img/upArrow.png"
+import React, { useRef, useState } from 'react';
+import "../../style/write/writeSidebar.scss";
+import pen from "../../img/pen.png";
+import file from "../../img/file.png";
+import downArrow from "../../img/downArrow.png";
+import upArrow from "../../img/upArrow.png";
 
-const WriteSidebar = () => {
+const WriteSidebar = ({ setImagePreview }: { setImagePreview: (image: string) => void }) => {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileInputClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files ? e.target.files[0] : null;
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
         <>
             <div className="writeSidebar-box">
@@ -15,10 +35,16 @@ const WriteSidebar = () => {
                             <img src={pen} alt="" />
                             <p>complete</p>
                         </a>
-                        <a href="/post">
+                        <div onClick={handleFileInputClick}>
                             <img src={file} alt="" />
                             <p>addfile</p>
-                        </a>
+                        </div>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                        />
                     </div>
                     <div className="postSidebar-arrow">
                         <img src={upArrow} alt="" />
@@ -27,6 +53,7 @@ const WriteSidebar = () => {
                 </div>
             </div>
         </>
-    )
-}
-export default WriteSidebar
+    );
+};
+
+export default WriteSidebar;
