@@ -5,7 +5,7 @@ import file from "../../img/file.png";
 import downArrow from "../../img/downArrow.png";
 import upArrow from "../../img/upArrow.png";
 
-const WriteSidebar = ({ setImagePreview }: { setImagePreview: (image: string) => void }) => {
+const WriteSidebar = ({ onFileSelect }: { onFileSelect: (file: File) => void }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileInputClick = () => {
@@ -17,11 +17,7 @@ const WriteSidebar = ({ setImagePreview }: { setImagePreview: (image: string) =>
     const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+            onFileSelect(file);
         }
     };
 
