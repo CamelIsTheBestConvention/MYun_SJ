@@ -5,7 +5,7 @@ import { Canvas } from "@react-three/fiber"
 const Main = () => {
     return (
         <>
-            <Canvas>
+            <Canvas style={{width: '100%', height: '100vh'}}>
                 <Element3D />
             </Canvas>
         </>

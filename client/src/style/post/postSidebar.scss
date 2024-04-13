@@ -6,6 +6,7 @@
     top: 35%;
     right: 4%;
     border-radius: 20px;
+    box-shadow: 3px 3px 5px 3px gray;
     // padding: 10px;
 }
 
@@ -29,8 +30,6 @@
     display: flex;
     justify-content: space-around;
 
-    
-    
     a{
         text-decoration: none;
         &:hover {
