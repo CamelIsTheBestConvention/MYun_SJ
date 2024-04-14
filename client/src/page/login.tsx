@@ -3,7 +3,7 @@ import Input from "../components/common/input";
 import LogoImg from "../components/common/logoImg";
 import Title from "../components/common/title";
 import React, { useState } from "react";
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {

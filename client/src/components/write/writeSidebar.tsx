@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import "../../style/write/writeSidebar.scss";
 import pen from "../../img/pen.png";
 import file from "../../img/file.png";

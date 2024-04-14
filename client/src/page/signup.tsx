@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Btn from "../components/common/btn"
 import LogoImg from "../components/common/logoImg"
 import Title from "../components/common/title"

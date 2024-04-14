@@ -12,6 +12,8 @@ const Post = require('./models/post');
 const postsRoutes = require('./routes/posts');
 const usersRoutes = require('./routes/users');
 
+const authMiddleware = require('./middlewares/authMiddleware');
+
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -34,6 +36,8 @@ app.use(session({
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', usersRoutes);
 
+
+app.use('/api/users', authMiddleware, usersRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
