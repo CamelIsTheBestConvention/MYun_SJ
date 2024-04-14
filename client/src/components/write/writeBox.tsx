@@ -7,14 +7,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const WriteBox = () => {
-    const [fileName, setFileName] = useState("");
     const [fileUrl, setFileUrl] = useState("");
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
 
-    const handleFileSelect = ({file, url}: {file:File, url:string}) => {
-        setFileName(file.name);
+    const handleFileSelect = ({url}: {url:string}) => {
         setFileUrl(url);
     };
 
@@ -41,7 +39,6 @@ const WriteBox = () => {
                     <Dropdown onCategoryChange={(categoryValue) => {
                         setCategoryValue(categoryValue);
                     }} />
-                    {fileName && <AddFileName>{fileName}</AddFileName>}
                 </WriteBoxHeader>
                 <WriteTitle onTitleChange={(titleValue) => {
                     setTitleValue(titleValue);
@@ -63,15 +60,4 @@ const WriteBoxWrapper = styled.div`
 
 const WriteBoxHeader = styled.div`
     position: relative;
-`
-
-const AddFileName = styled.div`
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: 3px solid #d9d9d9;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    padding: 10px;
-    font-weight: 700; 
 `
