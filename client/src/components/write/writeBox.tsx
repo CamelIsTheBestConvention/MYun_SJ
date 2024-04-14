@@ -8,17 +8,19 @@ import axios from 'axios';
 
 const WriteBox = () => {
     const [fileName, setFileName] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
 
-    const handleFileSelect = (file:any) => {
+    const handleFileSelect = ({file, url}: {file:File, url:string}) => {
         setFileName(file.name);
+        setFileUrl(url);
     };
 
     const handleSubmit = async () => {
         const postData = {
-            fileName,
+            fileUrl,
             category: categoryValue,
             title: titleValue,
             content: contentValue,
@@ -46,7 +48,6 @@ const WriteBox = () => {
                 }} />
                 <WriteContent onContentChange={(contentValue) => {
                     setContentValue(contentValue);
-                    console.log(contentValue);
                 }} />
                 <WriteSidebar onFileSelect={handleFileSelect} onSubmit={handleSubmit} />
             </WriteBoxWrapper>
@@ -72,6 +73,5 @@ const AddFileName = styled.div`
     background-color: #f4f4f4;
     border-radius: 10px;
     padding: 10px;
-    font-weight: 700;
-    display: {fileName ? block : hidden};
+    font-weight: 700; 
 `
