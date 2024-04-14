@@ -5,6 +5,7 @@ import Signup from './page/signup';
 import Post from './page/post';
 import Main from './page/main';
 import Write from './page/write';
+import PostDetail from './page/postDetail';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/post' element={<Post />}></Route>
           <Route path='/write' element={<Write />}></Route>
+          <Route path='/postdetail' element={<PostDetail />}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -9,7 +9,7 @@ const WriteSidebar = ({
     onFileSelect,
     onSubmit
 }: {
-    onFileSelect: (file: File) => void;
+    onFileSelect: (data: {file: File, url: string}) => void;
     onSubmit: () => void;
 }) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -23,7 +23,11 @@ const WriteSidebar = ({
     const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         if (file) {
-            onFileSelect(file);
+            const fileUrl = URL.createObjectURL(file);
+
+            onFileSelect({file, url:fileUrl});
+
+            console.log(fileUrl);
         }
     };
 
