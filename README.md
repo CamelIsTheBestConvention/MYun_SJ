@@ -1,2 +1,2 @@
-# MYun_SJ
-MYun_SJ
+# MYun_SJ  
+Welcome to MYun_SJ!
