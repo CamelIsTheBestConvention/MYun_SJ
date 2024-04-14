@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const WriteBox = () => {
-    const [fileName, setFileName] = useState("");
+    const [fileURL, setFileName] = useState("");
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
@@ -18,14 +18,14 @@ const WriteBox = () => {
 
     const handleSubmit = async () => {
         const postData = {
-            fileName,
+            fileURL,
             category: categoryValue,
             title: titleValue,
-            content: contentValue,
+            content: contentValue
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/models/post', postData);
+            const response = await axios.post('http://localhost:5000/api/posts', postData);
             console.log(response.data);
         } catch (error) {
             console.error('전송 실패: ', error);
@@ -39,7 +39,7 @@ const WriteBox = () => {
                     <Dropdown onCategoryChange={(categoryValue) => {
                         setCategoryValue(categoryValue);
                     }} />
-                    {fileName && <AddFileName>{fileName}</AddFileName>}
+                    {fileURL && <AddFileName>{fileURL}</AddFileName>}
                 </WriteBoxHeader>
                 <WriteTitle onTitleChange={(titleValue) => {
                     setTitleValue(titleValue);
