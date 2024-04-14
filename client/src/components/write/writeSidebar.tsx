@@ -23,11 +23,10 @@ const WriteSidebar = ({
     const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         if (file) {
-            const fileUrl = URL.createObjectURL(file);
+            const fileURL = URL.createObjectURL(file);
 
-            onFileSelect({url:fileUrl});
-
-            console.log(fileUrl);
+            onFileSelect({url:fileURL});
+            console.log(fileURL);
         }
     };
 

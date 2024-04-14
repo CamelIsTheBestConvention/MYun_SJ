@@ -7,18 +7,18 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const WriteBox = () => {
-    const [fileUrl, setFileUrl] = useState("");
+    const [fileURL, setFileURL] = useState("");
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
 
     const handleFileSelect = ({url}: {url:string}) => {
-        setFileUrl(url);
+        setFileURL(url);
     };
 
     const handleSubmit = async () => {
         const postData = {
-            fileUrl,
+            fileURL,
             category: categoryValue,
             title: titleValue,
             content: contentValue,
