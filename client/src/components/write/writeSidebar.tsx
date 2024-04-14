@@ -5,7 +5,13 @@ import file from "../../img/file.png";
 import downArrow from "../../img/downArrow.png";
 import upArrow from "../../img/upArrow.png";
 
-const WriteSidebar = ({ onFileSelect }: { onFileSelect: (file: File) => void }) => {
+const WriteSidebar = ({
+    onFileSelect,
+    onSubmit
+}: {
+    onFileSelect: (file: File) => void;
+    onSubmit: () => void;
+}) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileInputClick = () => {
@@ -27,10 +33,10 @@ const WriteSidebar = ({ onFileSelect }: { onFileSelect: (file: File) => void }) 
                 <div className="writeSidebar-inner">
                     <p className="writeSidebar-inner-nickname">Navigator</p>
                     <div className="writeSidebar-icon">
-                        <a href="/post">
+                        <div onClick={onSubmit}>
                             <img src={pen} alt="" />
                             <p>complete</p>
-                        </a>
+                        </div>
                         <div onClick={handleFileInputClick}>
                             <img src={file} alt="" />
                             <p>addfile</p>

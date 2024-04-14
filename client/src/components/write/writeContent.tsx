@@ -2,14 +2,15 @@ import { useRef } from "react"
 import "../../style/write/writeContent.scss"
 
 
-const WriteContent = () => {
+const WriteContent = ({onContentChange}: {onContentChange: (content: string) => void}) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    const handleResizeHeight = () => {
+    const handleResizeHeight = (e:any) => {
         if (textareaRef.current) {
             textareaRef.current.style.height = 'auto';
             textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
         }
+        onContentChange(e.target.value);
     };
 
     return (

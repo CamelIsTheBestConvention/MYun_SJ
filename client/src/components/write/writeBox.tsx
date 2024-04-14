@@ -4,24 +4,51 @@ import WriteTitle from "./writeTitle"
 import WriteContent from "./writeContent"
 import WriteSidebar from "./writeSidebar"
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const WriteBox = () => {
     const [fileName, setFileName] = useState("");
+    const [categoryValue, setCategoryValue] = useState("");
+    const [titleValue, setTitleValue] = useState("");
+    const [contentValue, setContentValue] = useState("");
 
     const handleFileSelect = (file:any) => {
         setFileName(file.name);
     };
 
+    const handleSubmit = async () => {
+        const postData = {
+            fileName,
+            category: categoryValue,
+            title: titleValue,
+            content: contentValue,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:5000/models/post', postData);
+            console.log(response.data);
+        } catch (error) {
+            console.error('전송 실패: ', error);
+        }
+    }
+
     return (
         <>
             <WriteBoxWrapper>
                 <WriteBoxHeader>
-                    <Dropdown />
-                    <AddFileName>{fileName}</AddFileName>
+                    <Dropdown onCategoryChange={(categoryValue) => {
+                        setCategoryValue(categoryValue);
+                    }} />
+                    {fileName && <AddFileName>{fileName}</AddFileName>}
                 </WriteBoxHeader>
-                <WriteTitle />
-                <WriteContent />
-                <WriteSidebar onFileSelect={handleFileSelect} />
+                <WriteTitle onTitleChange={(titleValue) => {
+                    setTitleValue(titleValue);
+                }} />
+                <WriteContent onContentChange={(contentValue) => {
+                    setContentValue(contentValue);
+                    console.log(contentValue);
+                }} />
+                <WriteSidebar onFileSelect={handleFileSelect} onSubmit={handleSubmit} />
             </WriteBoxWrapper>
         </>
     )
@@ -44,6 +71,7 @@ const AddFileName = styled.div`
     border: 3px solid #d9d9d9;
     background-color: #f4f4f4;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     font-weight: 700;
+    display: {fileName ? block : hidden};
 `
