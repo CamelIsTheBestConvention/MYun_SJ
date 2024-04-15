@@ -3,13 +3,13 @@ import Input from "../components/common/input";
 import LogoImg from "../components/common/logoImg";
 import Title from "../components/common/title";
 import React, { useState } from "react";
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
-    const [isLoading, setIsLoading] = useState(false);  // 로딩 상태 추가
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +30,7 @@ const Login = () => {
             console.log(response.data);
             alert('로그인했습니다.');
             navigate('/post');
-        } catch (error: unknown) {
+        } catch (error) {
             setIsLoading(false);
             if (axios.isAxiosError(error) && error.response) {
                 // AxiosError 타입 확인 및 response 객체가 있는지 확인
@@ -42,7 +42,6 @@ const Login = () => {
             }
         }
     };
-    
 
     return (
         <>
