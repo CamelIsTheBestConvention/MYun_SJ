@@ -11,6 +11,27 @@ const usersController = {
         }
     },
 
+    // 사용자 닉네임 조회
+    getLoggedInUserNickname: async (req, res) => {
+        try {
+            const userId = req.session.userId;
+            if (userId) {
+                const user = await User.findByPk(userId);
+                if (user) {
+                    res.json({ nickname: user.nickname });
+                } else {
+                    res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+                }
+            } else {
+                res.status(401).json({ message: '로그인이 필요합니다.' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+    
+    
+
     // 사용자 생성
     createUser: async (req, res) => {
         try {

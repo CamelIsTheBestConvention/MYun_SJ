@@ -30,7 +30,7 @@ app.use(session({
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: 'auto' }
+    cookie: { secure: 'false' }
 }));
 
 app.use('/api/posts', postsRoutes);
