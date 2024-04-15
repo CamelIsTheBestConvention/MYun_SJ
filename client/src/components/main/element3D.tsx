@@ -7,6 +7,12 @@ import * as THREE from "three"
 const Element3D = () => {
     const refMesh = useRef<Mesh | null>(null);
 
+    useFrame((state, delta) => {
+        if(refMesh.current != null) {
+            refMesh.current.rotation.z += delta
+        }
+    })
+
     return (
         <>
             <directionalLight position={[1, 1, 1]} />
@@ -20,12 +26,20 @@ const Element3D = () => {
                 scale={[2, 1, 1]}
             >
                 <boxGeometry />
-                <meshStandardMaterial color="#e67e22" />
+                <meshStandardMaterial
+                    color="#e67e22" 
+                    opacity={0.5}
+                    transparent={true}
+                />
                 <axesHelper />
 
-                <mesh>
+                <mesh
+                    scale={[0.1, 0.1, 0.1]}
+                    position-y={2}
+                >
                     <sphereGeometry />
                     <meshStandardMaterial color="red" />
+                    <axesHelper scale={5} />
                 </mesh>
             </mesh>
         </>
