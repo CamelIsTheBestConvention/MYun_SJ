@@ -31,7 +31,6 @@ const WriteBox = () => {
                 console.error('Error fetching user data:', error);
             }
         };
-    
         fetchUserData();
     }, []);
     const handleFileSelect = ({url}: {url:string}) => {

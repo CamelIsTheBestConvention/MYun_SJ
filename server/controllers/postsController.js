@@ -1,17 +1,17 @@
 const Post = require('../models/post');
 
 const postsController = {
-    // 모든 게시글 조회
     getAllPosts: async (req, res) => {
         try {
-            const posts = await Post.findAll();
+            const posts = await Post.findAll({
+                order: [['id', 'DESC']]
+            });
             res.json(posts);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     },
 
-    // 게시글 작성
     createPost: async (req, res) => {
         const { title, content, category, fileURL, userNickname } = req.body;
         try {
@@ -29,8 +29,6 @@ const postsController = {
         }
     },
 
-
-    // 특정 게시글 조회
     getPostById: async (req, res) => {
         try {
             const post = await Post.findByPk(req.params.id);
@@ -44,7 +42,6 @@ const postsController = {
         }
     },
 
-    // 게시글 업데이트
     updatePost: async (req, res) => {
         try {
             const post = await Post.findByPk(req.params.id);
@@ -59,7 +56,6 @@ const postsController = {
         }
     },
 
-    // 게시글 삭제
     deletePost: async (req, res) => {
         try {
             const post = await Post.findByPk(req.params.id);

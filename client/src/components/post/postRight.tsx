@@ -9,7 +9,7 @@ const PostRight = () => {
     interface Post {
         id: number;
         title: string;
-        imgUrl: string;
+        fileURL: string;
     }
     
     useEffect(() => {
@@ -33,7 +33,7 @@ const PostRight = () => {
     return (
         <PostListBox>
             {posts.map((post) => (
-                <PostList key={post.id} postId={post.id} postTitle={post.title} imgUrl={post.imgUrl} />
+                <PostList key={post.id} postId={post.id} postTitle={post.title} fileURL={post.fileURL} />
             ))}
         </PostListBox>
     );

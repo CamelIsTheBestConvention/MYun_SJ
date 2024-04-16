@@ -4,11 +4,11 @@ import "../../style/post/postList.scss"
 
 interface postListProps {
     postTitle: string;
-    imgUrl: string;
+    fileURL: string;
     postId: Number;
 }
 
-const PostList:React.FC<postListProps> = ({postId, postTitle, imgUrl}) => {
+const PostList:React.FC<postListProps> = ({postId, postTitle, fileURL}) => {
     return (
         <>
             <Link to={`/postdetail/${postId}`}>
@@ -17,7 +17,7 @@ const PostList:React.FC<postListProps> = ({postId, postTitle, imgUrl}) => {
                         <h2>{`${postId}. ${postTitle}`}</h2>
                     </div>
                     <div className="postList-img-box">
-                        <img src={imgUrl} alt="" />
+                        <img src={fileURL} alt="" />
                     </div>
                 </div>
             </Link>
