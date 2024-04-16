@@ -43,6 +43,11 @@ const Signup = () => {
             nickname,
             pw
         };
+
+        if(!(emailValid && nameValid && nicknameValid && pwValid && pwcheckValid)) {
+            alert('회원가입 정보를 확인해주세요.');
+            return;
+        }
     
         axios.post('http://localhost:49152/api/users', formData, {
             headers: {
