@@ -37,7 +37,7 @@ const PostSidebar = () => {
                             <img src={logout} alt="" />
                             <p>logout</p>
                         </a>
-                        <a href="#">
+                        <a href="/cube">
                             <img src={cube} alt="" />
                             <p>cube</p>
                         </a>
