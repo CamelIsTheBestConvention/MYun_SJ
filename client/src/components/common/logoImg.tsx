@@ -5,7 +5,7 @@ const LogoImg:React.FC<{}> = () => {
     return (
         <>
             <div className="logo-img-box">
-                <a href="/">
+                <a href="/post">
                     <img src={LogoImgImg} alt="" />
                 </a>
             </div>
