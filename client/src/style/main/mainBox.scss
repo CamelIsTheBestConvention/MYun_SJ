@@ -1,0 +1,25 @@
+.mainBox-wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+}
+
+.mainBox-logoWrapper {
+    width: 200px;
+    margin: 0 auto;
+    padding: 8% 0 5% 0;
+
+    img {
+        width: 200px;
+    }
+}
+
+.mainBox-btnWrapper {
+    width: 300px;
+    margin: 0 auto;
+    button {
+        width: 300px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+}

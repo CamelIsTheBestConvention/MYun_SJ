@@ -1,15 +1,20 @@
-import MyElement3D3 from "../components/main/MyElement3D3"
-import Element3D from "../components/main/element3D"
+import Cube from "../components/main/cube"
+import MainBox from "../components/main/mainBox"
 import "../style/main/main.scss"
 import { Canvas } from "@react-three/fiber"
 
 const Main = () => {
     return (
         <>
-            <Canvas camera={{near: 3.5, far: 6}} style={{width: '100%', height: '100vh'}}>
-                {/* <MyElement3D3 /> */}
-                <Element3D />
-            </Canvas>
+            <MainBox />
+            {/* <Canvas style={{position: "absolute",
+                            top: "0",
+                            left: "0",
+                            height: "100vh",
+                            width: "100vw",
+                            zIndex: -1}}> */}
+                <Cube />
+            {/* </Canvas> */}
         </>
     )
 }
