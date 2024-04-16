@@ -1,8 +1,9 @@
+const cors = require('cors');
 const express = require('express');
 const app = express();
-const cors = require('cors');
-const session = require('express-session');
 require('dotenv').config();
+
+const jwt = require('jsonwebtoken'); // JWT를 위한 패키지 추가
 
 const sequelize = require('./config/db');
 
@@ -12,9 +13,17 @@ const Post = require('./models/post');
 const postsRoutes = require('./routes/posts');
 const usersRoutes = require('./routes/users');
 
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('./middlewares/authMiddleware'); // JWT 검증 미들웨어 사용
 
-app.use(cors());
+// CORS 정책 설정: 특정 도메인에서만 요청을 허용
+const corsOptions = {
+    origin: 'http://localhost:3333', // 클라이언트 서버 주소
+    credentials: true, // 크로스-도메인 쿠키 전송 허용
+    optionsSuccessStatus: 200 // 일부 레거시 브라우저(IE11, various SmartTVs) 호환성 보장
+};
+
+app.use(cors(corsOptions));
+
 
 app.use((req, res, next) => {
     res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -26,19 +35,16 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-    secret: process.env.SESSION_KEY,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: 'false' }
-}));
-
-app.use('/api/posts', postsRoutes);
+// JWT 인증이 필요하지 않은 사용자 관련 경로 먼저 등록
 app.use('/api/users', usersRoutes);
 
+// 나머지 API 경로에 대해 JWT 인증 미들웨어 적용
+app.use('/api', authMiddleware);
 
-app.use('/api/users', authMiddleware, usersRoutes);
-const PORT = process.env.PORT || 5000;
+// 인증이 필요한 게시물 관련 경로
+app.use('/api/posts', postsRoutes);
+
+const PORT = process.env.PORT || 49152;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     sequelize.authenticate().then(() => {

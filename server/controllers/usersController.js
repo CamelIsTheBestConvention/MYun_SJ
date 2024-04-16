@@ -1,7 +1,7 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 const usersController = {
-    // 모든 사용자 조회
     getAllUsers: async (req, res) => {
         try {
             const users = await User.findAll();
@@ -11,38 +11,27 @@ const usersController = {
         }
     },
 
-    // 사용자 닉네임 조회
-    getLoggedInUserNickname: async (req, res) => {
-        try {
-            const userId = req.session.userId;
-            if (userId) {
-                const user = await User.findByPk(userId);
-                if (user) {
-                    res.json({ nickname: user.nickname });
-                } else {
-                    res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
-                }
-            } else {
-                res.status(401).json({ message: '로그인이 필요합니다.' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    },
-    
-    
-
-    // 사용자 생성
     createUser: async (req, res) => {
         try {
-            const user = await User.create(req.body);
-            res.status(201).json(user);
+            const { email, name, nickname, pw } = req.body;
+            const existingUser = await User.findOne({ where: { email } });
+            if (existingUser) {
+                return res.status(409).json({ message: '이미 존재하는 이메일 주소입니다.' });
+            }
+
+            const user = await User.create({ email, name, nickname, pw });
+            // JWT 토큰 생성
+            const token = jwt.sign(
+                { id: user.id, email: user.email },
+                process.env.JWT_SECRET, // 여기서 비밀키 사용
+                { expiresIn: '1h' }
+            );
+            res.status(201).json({ message: '회원가입 성공!', user, token });
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
     },
 
-    // 특정 사용자 조회
     getUserById: async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
@@ -56,7 +45,6 @@ const usersController = {
         }
     },
 
-    // 사용자 업데이트
     updateUser: async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
@@ -71,13 +59,12 @@ const usersController = {
         }
     },
 
-    // 사용자 삭제
     deleteUser: async (req, res) => {
         try {
             const user = await User.findByPk(req.params.id);
             if (user) {
                 await user.destroy();
-                res.status(204).send();
+                res.sendStatus(204);
             } else {
                 res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
             }
@@ -86,7 +73,6 @@ const usersController = {
         }
     },
 
-    // 사용자 로그인
     loginUser: async (req, res) => {
         const { email, pw } = req.body;
         try {
@@ -97,34 +83,20 @@ const usersController = {
             if (user.pw !== pw) {
                 return res.status(400).json({ message: '잘못된 비밀번호입니다.' });
             }
-            // 세션에 사용자 정보 저장
-            req.session.userId = user.id;
-            req.session.user = {  // 필요한 정보만 선택적으로 저장
-                id: user.id,
-                name: user.name,
-                email: user.email
-            };
-            res.json({ message: '로그인 성공!', user: req.session.user });
+            // JWT 토큰 생성
+            const token = jwt.sign(
+                { id: user.id, email: user.email },
+                process.env.JWT_SECRET,
+                { expiresIn: '1h' }
+            );
+            res.json({ message: '로그인 성공!', token });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     },
-    
 
-    // 사용자 로그아웃
-    logoutUser: async (req, res) => {
-        try {
-            req.session.destroy((err) => {
-                if (err) {
-                    console.log(err);
-                    res.status(500).json({ message: '로그아웃 에러' });
-                } else {
-                    res.json({ message: '로그아웃 성공' });
-                }
-            });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
+    getLoggedInUser: (req, res) => {
+        res.json({ user: req.user });
     }
 };
 

@@ -3,33 +3,25 @@ const router = express.Router();
 const usersController = require('../controllers/usersController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-// 모든 사용자를 가져오는 GET 요청
-router.get('/', usersController.getAllUsers);
+// JWT 검증이 필요한 GET 요청
+router.get('/', authMiddleware, usersController.getAllUsers);
 
-// 새로운 사용자를 등록하는 POST 요청
+// 회원가입은 JWT 검증 없음
 router.post('/', usersController.createUser);
 
-// 특정 사용자 정보를 가져오는 GET 요청
-router.get('/:id', usersController.getUserById);
+// 사용자 정보 조회, JWT 검증 필요
+router.get('/:id', authMiddleware, usersController.getUserById);
 
-// 특정 사용자 정보를 업데이트하는 PUT 요청
-router.put('/:id', usersController.updateUser);
+// 사용자 정보 업데이트, JWT 검증 필요
+router.put('/:id', authMiddleware, usersController.updateUser);
 
-// 특정 사용자를 삭제하는 DELETE 요청
-router.delete('/:id', usersController.deleteUser);
+// 사용자 삭제, JWT 검증 필요
+router.delete('/:id', authMiddleware, usersController.deleteUser);
 
-// 사용자 로그인을 처리하는 POST 요청
+// 로그인, JWT 검증 없음
 router.post('/login', usersController.loginUser);
 
-// 사용자 로그아웃을 처리하는 POST 요청
-router.post('/logout', usersController.logoutUser);
+// 프로필 조회, JWT 검증 필요
+router.get('/profile', authMiddleware, usersController.getLoggedInUser);
 
-// 프로필 조회 라우트 추가
-router.get('/profile', authMiddleware, (req, res) => {
-    if (req.session.user) {
-        res.json({ user: req.session.user });
-    } else {
-        res.status(404).json({ message: '사용자 정보를 찾을 수 없습니다.' });
-    }
-});
 module.exports = router;

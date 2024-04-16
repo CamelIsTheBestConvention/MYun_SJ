@@ -25,7 +25,7 @@ const WriteBox = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/models/post', postData);
+            const response = await axios.post('http://localhost:49152/models/post', postData);
             console.log(response.data);
         } catch (error) {
             console.error('전송 실패: ', error);

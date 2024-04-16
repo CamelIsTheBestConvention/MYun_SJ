@@ -44,28 +44,23 @@ const Signup = () => {
             pw
         };
     
-        try {
-            const response = await axios.post('http://localhost:5000/api/users', formData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            alert('회원가입 성공!');
-            console.log(response.data);
-            navigate('/login');
-        } catch (error: unknown) {
-            console.error('회원가입 에러:', error);
-            if (axios.isAxiosError(error)) {
-                if (error.response) {
-                    alert(`회원가입 실패: ${error.response.data.message || '서버 에러가 발생했습니다.'}`);
-                } else {
-                    alert('네트워크 에러 또는 서버가 응답하지 않습니다.');
-                }
-            } else {
-                alert('알 수 없는 에러가 발생했습니다.');
+        axios.post('http://localhost:49152/api/users', formData, {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        }
+        }).then(response => {
+            console.log('회원가입 성공', response);
+            navigate('/login');
+        }).catch(error => {
+            console.error('회원가입 에러', error);
+            if (error.response) {
+                alert(`회원가입 실패: ${error.response.data.message || '서버 에러가 발생했습니다.'}`);
+            } else {
+                alert('네트워크 에러 또는 서버가 응답하지 않습니다.');
+            }
+        });        
     };
+    
     
     return (
         <>

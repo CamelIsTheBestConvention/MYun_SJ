@@ -14,6 +14,10 @@ const Login = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!email || !pw) {
+            alert('이메일과 비밀번호를 모두 입력해주세요.');
+            return;
+        }
         setIsLoading(true);
 
         const formData = {
@@ -22,23 +26,21 @@ const Login = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users/login', formData, {
+            const response = await axios.post('http://localhost:49152/api/users/login', formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
-            alert('로그인했습니다.');
+            localStorage.setItem('userToken', response.data.token); // 로그인 성공 시 토큰 저장
+            alert('로그인에 성공하였습니다.');
             navigate('/post');
         } catch (error) {
             setIsLoading(false);
             if (axios.isAxiosError(error) && error.response) {
-                // AxiosError 타입 확인 및 response 객체가 있는지 확인
                 const message = error.response.data?.message || '없는 계정이거나 비밀번호가 틀렸습니다. 다시 시도해주세요.';
                 alert(message);
             } else {
-                // 네트워크 에러나 기타 예측하지 못한 에러
-                alert('알 수 없는 에러가 발생했습니다.');
+                alert('네트워크 오류가 발생했습니다.');
             }
         }
     };
@@ -49,7 +51,7 @@ const Login = () => {
                 <LogoImg />
                 <Title mainText="L O G I N" subText="로그인" />
                 <Input
-                    type="text"
+                    type="email" // 입력 필드를 이메일 형식으로 지정
                     placeholder="이메일 아이디"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
