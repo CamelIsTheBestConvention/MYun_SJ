@@ -22,4 +22,13 @@
     li {
         margin: 10px 0;
     }
+    
+    a {
+        text-decoration-line: none;
+        color: black;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
 }

@@ -3,10 +3,9 @@ import write from "../../img/write.png"
 import setting from "../../img/gear.png"
 import cube from "../../img/cube.png"
 import logout from "../../img/logout.png"
-import downArrow from "../../img/downArrow.png"
-import upArrow from "../../img/upArrow.png"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import ScrollArrow from "../common/scrollArrow"
 
 const PostSidebar = () => {
     const navigate = useNavigate();
@@ -54,10 +53,7 @@ const PostSidebar = () => {
                             <p>cube</p>
                         </a>
                     </div>
-                    <div className="postSidebar-arrow">
-                        <img src={upArrow} alt="" />
-                        <img src={downArrow} alt="" />
-                    </div>
+                    <ScrollArrow />
                 </div>
             </div>
         </>
