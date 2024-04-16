@@ -21,8 +21,11 @@ const PostDetailBox = () => {
 export default PostDetailBox
 
 const PostDetailBoxWrapper = styled.div`
-    width: 50%;
-    margin: 20px auto;
+    // width: 50%;
+    // margin: 20px auto;
+    width: 50vw;
+    // background-color: #f4f4f4;
+    margin: 10px 0 0 50px;
 `
 
 const PostDetailBoxHeader = styled.div`
