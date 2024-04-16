@@ -19,7 +19,7 @@ const App = () => {
           <Route path='/post' element={<Post />}></Route>
           <Route path='/post/:category' element={<Post />}></Route>
           <Route path='/write' element={<Write />}></Route>
-          <Route path='/postdetail' element={<PostDetail />}></Route>
+          <Route path='/postdetail/:postId' element={<PostDetail />}></Route>
         </Routes>
       </BrowserRouter>
     </>

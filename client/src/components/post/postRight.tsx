@@ -33,7 +33,7 @@ const PostRight = () => {
     return (
         <PostListBox>
             {posts.map((post) => (
-                <PostList key={post.id} postTitle={post.title} imgUrl={post.imgUrl} />
+                <PostList key={post.id} postId={post.id} postTitle={post.title} imgUrl={post.imgUrl} />
             ))}
         </PostListBox>
     );
