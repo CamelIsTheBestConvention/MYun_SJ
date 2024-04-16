@@ -59,6 +59,7 @@ const PostDetailBox = () => {
                 </PostDetailBoxHeader>
                 <PostDetailTitle title={post.title} />
                 <PostDetailContent content={post.content} />
+                <CommentBox />
                 {postId && <PostDetailSidebar postId={postId} />}
             </PostDetailBoxWrapper>
         </>
