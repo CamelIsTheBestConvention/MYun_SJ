@@ -6,6 +6,7 @@ import PostDetailCategory from "./postDetailCategory"
 import PostDetailTitle from "./postDetailTitle"
 import PostDetailContent from "./postDetailContent"
 import PostDetailSidebar from "./postDetailSidebar"
+import CommentBox from '../comment/commentBox';
 
 const PostDetailBox = () => {
     const { postId } = useParams();
@@ -49,12 +50,21 @@ const PostDetailBox = () => {
 
     return (
         <>
-            <PostDetailBoxWrapper>
+            {/* <PostDetailBoxWrapper>
                 <PostDetailBoxHeader>
                     <PostDetailCategory category={post.category} />
                 </PostDetailBoxHeader>
                 <PostDetailTitle title={post.title} />
                 <PostDetailContent content={post.content} />
+                <PostDetailSidebar />
+            </PostDetailBoxWrapper> */}
+            <PostDetailBoxWrapper>
+                <PostDetailBoxHeader>
+                    <PostDetailCategory category="프론트엔드" />
+                </PostDetailBoxHeader>
+                <PostDetailTitle title="추만석" />
+                <PostDetailContent content="그는 신이야" />
+                <CommentBox />
                 <PostDetailSidebar />
             </PostDetailBoxWrapper>
         </>
