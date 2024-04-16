@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import "../../style/write/writeSidebar.scss";
 import pen from "../../img/pen.png";
 import file from "../../img/file.png";
-import downArrow from "../../img/downArrow.png";
-import upArrow from "../../img/upArrow.png";
+import ScrollArrow from '../common/scrollArrow';
+
 
 const WriteSidebar = ({
     onFileSelect,
@@ -30,6 +30,8 @@ const WriteSidebar = ({
         }
     };
 
+
+
     return (
         <>
             <div className="writeSidebar-box">
@@ -51,10 +53,7 @@ const WriteSidebar = ({
                             style={{ display: 'none' }}
                         />
                     </div>
-                    <div className="postSidebar-arrow">
-                        <img src={upArrow} alt="" />
-                        <img src={downArrow} alt="" />
-                    </div>
+                    <ScrollArrow />
                 </div>
             </div>
         </>
