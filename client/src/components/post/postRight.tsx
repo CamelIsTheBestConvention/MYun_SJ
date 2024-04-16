@@ -9,17 +9,16 @@ const PostRight = () => {
     interface Post {
         id: number;
         title: string;
-        content: string;
         imgUrl: string;
     }
     
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const token = localStorage.getItem('userToken'); // 사용자 토큰 가져오기
+                const token = localStorage.getItem('userToken');
                 const response = await axios.get("http://localhost:49152/api/posts", {
                     headers: {
-                        Authorization: `Bearer ${token}` // 토큰을 포함시켜서 요청 보내기
+                        Authorization: `Bearer ${token}`
                     }
                 });
                 setPosts(response.data);
@@ -34,7 +33,7 @@ const PostRight = () => {
     return (
         <PostListBox>
             {posts.map((post) => (
-                <PostList key={post.id} postTitle={post.title} postContent={post.content} imgUrl={post.imgUrl} />
+                <PostList key={post.id} postTitle={post.title} imgUrl={post.imgUrl} />
             ))}
         </PostListBox>
     );
