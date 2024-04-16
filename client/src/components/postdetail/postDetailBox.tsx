@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import styled from "styled-components"
 import PostDetailCategory from "./postDetailCategory"
 import PostDetailTitle from "./postDetailTitle"
@@ -8,47 +8,58 @@ import PostDetailContent from "./postDetailContent"
 import PostDetailSidebar from "./postDetailSidebar"
 
 const PostDetailBox = () => {
-    const { id } = useParams();
-    const [post, setPost] = useState({ title: '', content: '' });
+    const { postId } = useParams();
+    const [post, setPost] = useState({ title: '', content: '' , category: ''});
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchPost = async () => {
+        const fetchData = async () => {
             try {
                 const userToken = localStorage.getItem('userToken');
-                const response = await axios.get(`http://localhost:49152/api/posts/${id}`, {
+                const postResponse = await axios.get(`http://localhost:49152/api/posts/${postId}`, {
                     headers: {
                         Authorization: `Bearer ${userToken}`
                     }
                 });
-                setPost(response.data);
+                setPost(postResponse.data);
+                setLoading(false);
             } catch (error) {
-                console.error('Error fetching post', error);
+                if (axios.isAxiosError(error)) {
+                    if (error.response && error.response.status === 404) {
+                        console.error('게시글을 찾을 수 없습니다.');
+                    } else {
+                        console.error('게시글을 fetch할 수 없습니다.', error);
+                    }
+                } else {
+                    console.error('알 수 없는 에러:', error);
+                }
+                setLoading(false);
             }
         };
-    
-        if (id) {
-            fetchPost();
+
+        if (postId) {
+            fetchData();
         }
-    }, [id]);
+    }, [postId]);
+
     
+    if (isLoading) {
+        return <div>Loading post with ID: {postId}...</div>;
+    }
 
     return (
         <>
             <PostDetailBoxWrapper>
                 <PostDetailBoxHeader>
-                    <PostDetailCategory />
+                    <PostDetailCategory category={post.category} />
                 </PostDetailBoxHeader>
-                <div className="detail-title-box">
-                    <div>{post.title}</div>
-                </div>
-                <div className="detail-content-box">
-                    <div>{post.content}</div>
-                </div>
+                <PostDetailTitle title={post.title} />
+                <PostDetailContent content={post.content} />
                 <PostDetailSidebar />
             </PostDetailBoxWrapper>
         </>
-    )
-}
+    );
+};
 
 export default PostDetailBox;
 

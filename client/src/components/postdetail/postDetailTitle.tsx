@@ -1,12 +1,16 @@
-import "../../style/postDetail/postDetailTitle.scss"
+import "../../style/postDetail/postDetailTitle.scss";
 
-const PostDetailTitle = () => {
+interface PostDetailTitleProps {
+    title: string;
+}
+
+const PostDetailTitle = ({ title }: PostDetailTitleProps) => {
     return (
         <>
             <div className="detail-title-box">
-                <div>테스트</div>
+                <div>{title}</div>
             </div>
         </>
-    )
-}
-export default PostDetailTitle
+    );
+};
+export default PostDetailTitle;

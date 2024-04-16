@@ -1,15 +1,16 @@
-import { useRef } from "react"
 import "../../style/postDetail/postDetailContent.scss"
 
+interface PostDetailContentProps {
+    content: string;
+}
 
-const PostDetailContent = () => {
-
+const PostDetailContent = ({ content }: PostDetailContentProps) => {
     return (
         <>
             <div className="detail-content-box">
-                <div>내용 테스트</div>
+                <div>{content}</div>
             </div>
         </>
-    )
-}
-export default PostDetailContent
+    );
+};
+export default PostDetailContent;

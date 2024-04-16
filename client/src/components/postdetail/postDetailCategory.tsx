@@ -1,10 +1,14 @@
 import "../../style/postDetail/postDetailCategory.scss"
 
-const PostDetailCategory = () => {
+interface PostDetailCategoryProps {
+    category: string;
+}
+
+const PostDetailCategory = ({ category }: PostDetailCategoryProps) => {
     return (
         <>
             <div className="detail-category">
-                <p>프론트엔드</p>
+                <p>{category}</p>
             </div>
         </>
     )

@@ -23,7 +23,7 @@ const usersController = {
             // JWT 토큰 생성
             const token = jwt.sign(
                 { id: user.id, email: user.email },
-                process.env.JWT_SECRET, // 여기서 비밀키 사용
+                process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             );
             res.status(201).json({ message: '회원가입 성공!', user, token });
@@ -89,7 +89,6 @@ const usersController = {
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             );
-            // 사용자 정보를 응답에 포함
             res.json({ message: '로그인 성공!', token, userId: user.id });
         } catch (error) {
             res.status(500).json({ message: error.message });
