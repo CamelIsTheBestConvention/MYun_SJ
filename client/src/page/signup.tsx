@@ -50,6 +50,7 @@ const Signup = () => {
             }
         }).then(response => {
             console.log('회원가입 성공', response);
+            alert('회원가입 성공');
             navigate('/login');
         }).catch(error => {
             console.error('회원가입 에러', error);

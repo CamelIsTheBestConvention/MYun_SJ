@@ -13,10 +13,8 @@ const PostSidebar = () => {
     const logoutFunc = () => {
         // 클라이언트 측 인증 정보 삭제
         localStorage.removeItem('userToken'); // 토큰 삭제
-        sessionStorage.clear(); // 세션 스토리지 클리어 (필요한 경우)
-
-        // 사용자를 로그인 페이지로 리디렉션
-        navigate('/login');
+        localStorage.removeItem('userId');  // 사용자 ID도 제거되도록 함
+        navigate('/login');  // 로그아웃 후 로그인 페이지나 홈페이지로 리다이렉트
     };
 
     return (
