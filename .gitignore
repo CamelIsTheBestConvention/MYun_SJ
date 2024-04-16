@@ -7,6 +7,7 @@ node_modules
 .env.test.local
 .env.production.local
 test.py
+test.js
 
 server.cert
 server.key
