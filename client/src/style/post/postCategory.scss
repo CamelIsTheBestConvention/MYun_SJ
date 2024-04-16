@@ -18,17 +18,26 @@
 .post-category-list {
     margin: 10px;
     list-style: none;
+    cursor: pointer;
 
-    li {
+    input[type="radio"] {
         margin: 10px 0;
+        display: none;
+        cursor: pointer;  
+    }
+
+    :checked + label {
+        font-weight: bold;
     }
     
-    a {
-        text-decoration-line: none;
-        color: black;
+    // a {
+    //     text-decoration-line: none;
+    //     color: black;
 
-        &:hover {
-            font-weight: bold;
-        }
-    }
+    //     &:hover,
+    //     &:active,
+    //     &.active {
+    //         font-weight: bold;
+    //     }
+    // }
 }

@@ -1,14 +1,29 @@
 import styled from "styled-components"
 import PostList from "./postList"
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 const PostRight = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const loadPosts = async () => {
+            try {
+                const response = await axios.get('http://localhost:1111');
+                setPosts(response.data)
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        loadPosts();
+    }, [])
+
     return (
         <>
             <PostListBox>
-                <PostList postH2="문미새1" postContent="문미새내용1" />
-                <PostList postH2="문미새2" postContent="문미새내용2" />
-                <PostList postH2="문미새3" postContent="문미새내용3" />
-                <PostList postH2="문미새4" postContent="문미새내용4" />
+                {/* {posts.map((post) => (
+                    <PostList key={post.id} postTitle={post.title} postContent={post.content} imgUrl={post.imgUrl} />
+                ))} */}
             </PostListBox>
         </>
     )
