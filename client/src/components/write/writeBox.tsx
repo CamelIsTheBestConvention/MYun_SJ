@@ -16,6 +16,10 @@ const WriteBox = () => {
         setFileURL(url);
     };
 
+    const deleteImg = () => {
+        setFileURL("");
+    }
+
     const handleSubmit = async () => {
         const postData = {
             fileURL,
@@ -43,6 +47,14 @@ const WriteBox = () => {
                 <WriteTitle onTitleChange={(titleValue) => {
                     setTitleValue(titleValue);
                 }} />
+                {fileURL && (
+                    <WriteImgBox>
+                        <div>
+                            <img src={fileURL} alt="" style={{width: '100%', height: 'auto'}}/>
+                        </div>
+                        <WriteImgDelete onClick={deleteImg}>❌</WriteImgDelete>
+                    </WriteImgBox>
+                )}
                 <WriteContent onContentChange={(contentValue) => {
                     setContentValue(contentValue);
                 }} />
@@ -60,4 +72,24 @@ const WriteBoxWrapper = styled.div`
 
 const WriteBoxHeader = styled.div`
     position: relative;
+`
+
+const WriteImgBox = styled.div`
+    position: relative;
+`
+
+const WriteImgDelete = styled.div`
+    position: absolute;
+    top: -3%;
+    right: -3%;
+    padding: 8px;
+    border-radius: 50%;
+    border: 3px solid #d9d9d9;
+    background-color: white;
+    opacity: 0.6;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+    }
 `
