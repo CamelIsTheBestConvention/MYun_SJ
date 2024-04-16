@@ -95,21 +95,6 @@ const usersController = {
             res.status(500).json({ message: error.message });
         }
     },
-
-    getProfile: async (req, res) => {
-        // 요청에서 사용자 ID를 추출합니다.
-        const userId = req.user.id; // JWT 미들웨어를 통해 검증된 사용자 ID
-        try {
-            const user = await User.findByPk(userId);
-            if (!user) {
-                return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
-            }
-            res.json({ user });
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    },
-
     
     getLoggedInUser: (req, res) => {
         res.json({ user: req.user });

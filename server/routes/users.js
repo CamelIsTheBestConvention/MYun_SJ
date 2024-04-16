@@ -21,7 +21,4 @@ router.delete('/:id', authMiddleware, usersController.deleteUser);
 // 로그인, JWT 검증 없음
 router.post('/login', usersController.loginUser);
 
-router.get('/profile', authMiddleware, usersController.getProfile);
-
-
 module.exports = router;
