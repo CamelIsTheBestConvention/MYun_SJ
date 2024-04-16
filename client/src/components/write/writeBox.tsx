@@ -7,7 +7,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const WriteBox = () => {
+interface WriteBoxProps {
+    postId?: string;
+    initialData?: any;
+}
+
+const WriteBox = ({ postId, initialData }: WriteBoxProps) => {
     const [fileURL, setFileURL] = useState("");
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
@@ -32,7 +37,14 @@ const WriteBox = () => {
             }
         };
         fetchUserData();
-    }, []);
+        if (initialData) {
+            setFileURL(initialData.fileURL || "");
+            setCategoryValue(initialData.category || "");
+            setTitleValue(initialData.title || "");
+            setContentValue(initialData.content || "");
+            //setNickname(initialData.nickname || '');
+        }
+    }, [initialData]);
     const handleFileSelect = ({url}: {url:string}) => {
         setFileURL(url);
     };
@@ -52,12 +64,23 @@ const WriteBox = () => {
     
         try {
             const userToken = localStorage.getItem('userToken');
-            const response = await axios.post(`http://localhost:49152/api/posts`, postData, { 
-                headers: {
-                    Authorization: `Bearer ${userToken}`
-                }
-            });
-            console.log('응답 데이터:', response.data);
+            let response;
+            if (postId) {
+                response = await axios.put(`http://localhost:49152/api/posts/${postId}`, postData, {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
+                console.log('Update response:', response.data);
+            } else {
+                response = await axios.post(`http://localhost:49152/api/posts`, postData, {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
+                console.log('Post response:', response.data);
+            }
+    
             if (response.data && response.data.id) {
                 navigate(`/postdetail/${response.data.id}`);
             } else {
@@ -67,7 +90,6 @@ const WriteBox = () => {
             console.error('전송 실패: ', error);
         }
     };
-    
 
     return (
         <>

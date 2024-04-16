@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import styled from "styled-components"
 import PostDetailCategory from "./postDetailCategory"
 import PostDetailTitle from "./postDetailTitle"
@@ -9,10 +9,16 @@ import PostDetailSidebar from "./postDetailSidebar"
 
 const PostDetailBox = () => {
     const { postId } = useParams();
-    const [post, setPost] = useState({ title: '', content: '' , category: ''});
+    const [post, setPost] = useState({ title: '', content: '', category: ''});
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (!postId) {
+            console.error('postId가 없습니다.');
+            setLoading(false);
+            return;
+        }
+
         const fetchData = async () => {
             try {
                 const userToken = localStorage.getItem('userToken');
@@ -37,12 +43,9 @@ const PostDetailBox = () => {
             }
         };
 
-        if (postId) {
-            fetchData();
-        }
+        fetchData();
     }, [postId]);
 
-    
     if (isLoading) {
         return <div>Loading post with ID: {postId}...</div>;
     }
@@ -55,11 +58,12 @@ const PostDetailBox = () => {
                 </PostDetailBoxHeader>
                 <PostDetailTitle title={post.title} />
                 <PostDetailContent content={post.content} />
-                <PostDetailSidebar />
+                {postId && <PostDetailSidebar postId={postId} />}
             </PostDetailBoxWrapper>
         </>
     );
 };
+
 
 export default PostDetailBox;
 
