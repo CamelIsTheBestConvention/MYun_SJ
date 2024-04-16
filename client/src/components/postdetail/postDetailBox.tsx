@@ -10,7 +10,7 @@ import CommentBox from '../comment/commentBox';
 
 const PostDetailBox = () => {
     const { postId } = useParams();
-    const [post, setPost] = useState({ title: '', content: '', category: ''});
+    const [post, setPost] = useState({ title: '', content: '', category: '', fileURL: ''});
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -58,7 +58,15 @@ const PostDetailBox = () => {
                     <PostDetailCategory category={post.category} />
                 </PostDetailBoxHeader>
                 <PostDetailTitle title={post.title} />
+                {post.fileURL && (
+                    <WriteImgBox>
+                        <div>
+                            <img src={post.fileURL} alt="" style={{width: '100%', height: 'auto'}}/>
+                        </div>
+                    </WriteImgBox>
+                )}
                 <PostDetailContent content={post.content} />
+                <CommentBox />
                 {postId && <PostDetailSidebar postId={postId} />}
             </PostDetailBoxWrapper>
         </>
@@ -75,4 +83,8 @@ const PostDetailBoxWrapper = styled.div`
 
 const PostDetailBoxHeader = styled.div`
     position: relative;
+`;
+
+const WriteImgBox = styled.div`
+    width: 100%;
 `;
