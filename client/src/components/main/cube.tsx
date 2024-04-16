@@ -1,90 +1,92 @@
+import hyunwoo from "../../img/image (2).png"
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
-import "../../style/main/main.scss"
-import earth1 from "../../img/earthtex.jpg";
-import earth2 from "../../img/earthtex2.jpg";
 
-const Cube = () => {
+const Cube: React.FC = () => {
     const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-    // 씬, 카메라, 렌더러 생성
-    const cubeSize = 300;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+        // 씬, 카메라, 렌더러 초기화
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(new THREE.Color(0x000000)); // 검은색 배경 설정
 
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setSize(cubeSize, cubeSize);
-
-    if (mountRef.current) {
-        mountRef.current.appendChild(renderer.domElement);
-    }
-
-    const textureLoader = new THREE.TextureLoader();
-    const texture1 = textureLoader.load(earth1);
-    const texture2 = textureLoader.load(earth2);
-    
-    const vertexShader = `
-        varying vec2 vUv;
-        void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        if (mountRef.current) {
+            mountRef.current.appendChild(renderer.domElement);
         }
-    `;
 
-    const fragmentShader = `
-        uniform sampler2D baseTexture;
-        uniform sampler2D topTexture;
-        varying vec2 vUv;
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load(hyunwoo);
 
-        void main() {
-            vec4 baseColor = texture2D(baseTexture, vUv);
-            vec4 topColor = texture2D(topTexture, vUv);
-            gl_FragColor = mix(baseColor, topColor, 0.5);
-            gl_FragColor.rgb *= 0.6911;
-        }
-    `;
+        // 큐브 생성
+        const geometry = new THREE.BoxGeometry(3, 3, 3);
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
 
-    const uniforms = {
-        baseTexture: { value: texture1 },
-        topTexture: { value: texture2 }
-    };
+        camera.position.z = 5;
 
-    const material = new THREE.ShaderMaterial({
-        uniforms: uniforms,
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader
-    });
+        // 큐브 이동 방향
+        let dx = 0.05;
+        let dy = 0.05;
 
-    // 큐브 생성
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+        // 렌더 루프
+        const animate = () => {
+            requestAnimationFrame(animate);
 
-    camera.position.z = 3;
+            // 큐브 회전
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
 
-    // 애니메이션 루프
-    const animate = () => {
-        requestAnimationFrame(animate);
+            cube.position.x += dx;
+            cube.position.y += dy;
 
-        cube.rotation.x += 0.005;
-        cube.rotation.y += 0.005;
+            const maxX = window.innerWidth / (window.innerWidth / camera.position.z);
+            const maxY = window.innerHeight / (window.innerHeight / camera.position.z);
+            if (cube.position.x > maxX || cube.position.x < -maxX) {
+                dx = -dx;
+            }
+            if (cube.position.y > maxY || cube.position.y < -maxY) {
+                dy = -dy;
+            }
 
-        renderer.render(scene, camera);
-    };
+            renderer.render(scene, camera);
+        };
 
-    animate();
+        animate();
 
-    // 컴포넌트 언마운트 시 렌더러와 HTML 요소 제거
-    return () => {
-        if(mountRef.current) {
-            mountRef.current.removeChild(renderer.domElement);
-        }
-    };
-}, []);
+        const onDocumentMouseDown = (e:any) => {
+            e.preventDefault();
 
-return <div ref={mountRef} className='cube-container'></div>;
+            const mouse = new THREE.Vector2();
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (e.clientY / window.innerHeight) * 2 + 1;
+
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+
+            const intersects = raycaster.intersectObjects([cube]);
+
+            if (intersects.length > 0) {
+                // 여기에 원하는 페이지로의 이동 로직을 추가합니다.
+                window.location.href = '/post';
+            }
+        };
+
+        document.addEventListener('mousedown', onDocumentMouseDown, false);
+
+        // 컴포넌트 언마운트 시 렌더러에서 캔버스 제거
+        return () => {
+            if (mountRef.current) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
+            document.removeEventListener('mousedown', onDocumentMouseDown, false);
+        };
+    }, []);
+
+    return <div ref={mountRef} style={{cursor: "pointer"}} />;
 };
 
 export default Cube;
