@@ -42,7 +42,7 @@ const Cube = () => {
             vec4 baseColor = texture2D(baseTexture, vUv);
             vec4 topColor = texture2D(topTexture, vUv);
             gl_FragColor = mix(baseColor, topColor, 0.5);
-            gl_FragColor.rgb *= 0.5;
+            gl_FragColor.rgb *= 0.6911;
         }
     `;
 

@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import LogoImg from "../components/common/logoImg"
 import PostTitle from "../components/post/postTitle"
 import PostWrapper from "../components/post/postWrapper"

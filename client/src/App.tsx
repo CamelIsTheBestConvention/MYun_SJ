@@ -18,7 +18,7 @@ const App = () => {
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/post' element={<Post />}></Route>
           <Route path='/post/:category' element={<Post />}></Route>
-          <Route path='/write' element={<Write />}></Route>
+          <Route path='/write/:postId?' element={<Write />}></Route>
           <Route path='/postdetail/:postId' element={<PostDetail />}></Route>
         </Routes>
       </BrowserRouter>
