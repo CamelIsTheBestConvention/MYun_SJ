@@ -13,11 +13,19 @@ const postsController = {
 
     // 게시글 생성
     createPost: async (req, res) => {
+        const { title, content, category, fileURL, userNickname } = req.body;
         try {
-            const post = await Post.create(req.body);
-            res.status(201).json(post);
+            const post = await Post.create({
+                title,
+                content,
+                category,
+                fileURL,
+                userNickname
+            });
+            res.status(201).json({ message: '글이 성공적으로 작성되었습니다.', post });
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            console.error('글 작성 실패:', error);
+            res.status(500).json({ message: '글 작성에 실패했습니다.' });
         }
     },
 

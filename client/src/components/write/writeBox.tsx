@@ -3,7 +3,7 @@ import Dropdown from "../common/dropdown"
 import WriteTitle from "./writeTitle"
 import WriteContent from "./writeContent"
 import WriteSidebar from "./writeSidebar"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const WriteBox = () => {
@@ -11,7 +11,27 @@ const WriteBox = () => {
     const [categoryValue, setCategoryValue] = useState("");
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
-
+    const [nickname, setNickname] = useState('');
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userIdFromStorage = localStorage.getItem('userId');
+                const userToken = localStorage.getItem('userToken');
+                if (userIdFromStorage && userToken) {
+                    const response = await axios.get(`http://localhost:49152/api/users/${userIdFromStorage}`, {
+                        headers: {
+                            Authorization: `Bearer ${userToken}`
+                        }
+                    });
+                    setNickname(response.data.nickname);
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+    
+        fetchUserData();
+    }, []);
     const handleFileSelect = ({url}: {url:string}) => {
         setFileURL(url);
     };
@@ -22,19 +42,26 @@ const WriteBox = () => {
 
     const handleSubmit = async () => {
         const postData = {
-            fileURL,
+            fileURL: fileURL,
             category: categoryValue,
             title: titleValue,
             content: contentValue,
+            userNickname: nickname,
         };
-
+    
         try {
-            const response = await axios.post('http://localhost:49152/models/post', postData);
+            const userToken = localStorage.getItem('userToken'); // 사용자 토큰 가져오기
+            const response = await axios.post('http://localhost:49152/api/posts', postData, {
+                headers: {
+                    Authorization: `Bearer ${userToken}` // 요청 헤더에 토큰 포함
+                }
+            });
             console.log(response.data);
         } catch (error) {
             console.error('전송 실패: ', error);
         }
     }
+    
 
     return (
         <>

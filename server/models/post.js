@@ -19,8 +19,9 @@ Post.init({
     fileURL: {
         type: DataTypes.STRING(500)
     },
-    user_nickname: {
-        type: DataTypes.STRING(500)
+    userNickname: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     },
     newDate: {
         type: DataTypes.DATE,
@@ -32,7 +33,9 @@ Post.init({
     }
 }, {
     sequelize,
-    modelName: 'post',
+    modelName: 'Post',
+    timestamps: false // 타임스탬프 컬럼 비활성화
 });
+
 
 module.exports = Post;

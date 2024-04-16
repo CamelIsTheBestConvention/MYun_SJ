@@ -5,14 +5,12 @@ import "../../style/post/postProfile.scss";
 
 const PostProfile = () => {
     const [nickname, setNickname] = useState('');
-    const [userId, setUserId] = useState('');
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const userIdFromStorage = localStorage.getItem('userId');
                 const userToken = localStorage.getItem('userToken');
                 if (userIdFromStorage && userToken) {
-                    setUserId(userIdFromStorage);
                     const response = await axios.get(`http://localhost:49152/api/users/${userIdFromStorage}`, {
                         headers: {
                             Authorization: `Bearer ${userToken}`
