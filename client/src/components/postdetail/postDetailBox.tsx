@@ -10,7 +10,7 @@ import CommentBox from '../comment/commentBox';
 
 const PostDetailBox = () => {
     const { postId } = useParams();
-    const [post, setPost] = useState({ title: '', content: '', category: '', fileURL: '', updateDate: ''});
+    const [post, setPost] = useState({ title: '', content: '', category: '', fileURL: '', nickname: '', updateDate: ''});
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const PostDetailBox = () => {
             <PostDetailBoxWrapper>
                 <PostDetailBoxHeader>
                     <PostDetailCategory category={post.category} />
-                    <PostDate>{post.updateDate}</PostDate>
+                    <PostDateAndNick>{post.nickname} | {post.updateDate}</PostDateAndNick>
                 </PostDetailBoxHeader>
                 <PostDetailTitle title={post.title} />
                 {post.fileURL && (
@@ -88,10 +88,10 @@ const PostDetailBoxHeader = styled.div`
     justify-content: space-between;
 `;
 
-const PostDate = styled.span`
+const PostDateAndNick = styled.span`
     align-item: center;
+    font-size: 18px;
     line-height: 4;
-    font-size: 17px;
     margin-right: 10px;
     color: gray;
 `
