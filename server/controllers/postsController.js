@@ -12,6 +12,7 @@ const postsController = {
     },
 
     // 게시글 생성
+    // 게시글 생성
     createPost: async (req, res) => {
         const { title, content, category, fileURL, userNickname } = req.body;
         try {
@@ -22,12 +23,13 @@ const postsController = {
                 fileURL,
                 userNickname
             });
-            res.status(201).json({ message: '글이 성공적으로 작성되었습니다.', post });
+            res.status(201).json(post);  // 전체 포스트 데이터를 JSON으로 반환
         } catch (error) {
             console.error('글 작성 실패:', error);
             res.status(500).json({ message: '글 작성에 실패했습니다.' });
         }
     },
+
 
     // 특정 게시글 조회
     getPostById: async (req, res) => {

@@ -5,6 +5,7 @@ import WriteContent from "./writeContent"
 import WriteSidebar from "./writeSidebar"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const WriteBox = () => {
     const [fileURL, setFileURL] = useState("");
@@ -12,6 +13,7 @@ const WriteBox = () => {
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
     const [nickname, setNickname] = useState('');
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -50,17 +52,22 @@ const WriteBox = () => {
         };
     
         try {
-            const userToken = localStorage.getItem('userToken'); // 사용자 토큰 가져오기
-            const response = await axios.post('http://localhost:49152/api/posts', postData, {
+            const userToken = localStorage.getItem('userToken');
+            const response = await axios.post(`http://localhost:49152/api/posts`, postData, { 
                 headers: {
-                    Authorization: `Bearer ${userToken}` // 요청 헤더에 토큰 포함
+                    Authorization: `Bearer ${userToken}`
                 }
             });
-            console.log(response.data);
+            console.log('응답 데이터:', response.data);
+            if (response.data && response.data.id) {
+                navigate(`/postdetail/${response.data.id}`);
+            } else {
+                console.error('포스트 ID를 찾을 수 없습니다.');
+            }
         } catch (error) {
             console.error('전송 실패: ', error);
         }
-    }
+    };
     
 
     return (

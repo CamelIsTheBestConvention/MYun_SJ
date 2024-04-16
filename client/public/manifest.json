@@ -4,7 +4,7 @@
     "description": "Welcome to my MYUN",
     "icons": [
       {
-        "src": "myun_logo.png",
+        "src": "favicon.ico",
         "sizes": "192x192",
         "type": "image/png"
       }
