@@ -2,7 +2,6 @@ import mainLogo from "../../img/main_myun.png"
 import "../../style/main/mainBox.scss"
 
 const MainBox = () => {
-
     return (
         <>
             <div className="mainBox-wrapper">
@@ -10,10 +9,14 @@ const MainBox = () => {
                     <img src={mainLogo} alt="" />
                 </div>
                 <div className="mainBox-btnWrapper">
-                    <button>L O G I N</button>
+                    <a href="/login">
+                        <button>L O G I N</button>
+                    </a>
                 </div>
                 <div className="mainBox-btnWrapper">
-                    <button>S I G N - U P</button>
+                    <a href="/signup">
+                        <button>S I G N - U P</button>
+                    </a>
                 </div>
             </div>
         </>

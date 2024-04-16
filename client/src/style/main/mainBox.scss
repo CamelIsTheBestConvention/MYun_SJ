@@ -1,7 +1,8 @@
 .mainBox-wrapper {
     width: 100%;
     height: 100vh;
-    background-color: black;
+    // background-color: black;
+    background-image: url("../../img/galaxy.png");
 }
 
 .mainBox-logoWrapper {
@@ -15,11 +16,22 @@
 }
 
 .mainBox-btnWrapper {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
+
     button {
-        width: 300px;
-        height: 50px;
+        width: 400px;
+        height: 60px;
         margin-bottom: 10px;
+        font-size: 2rem;
+        font-weight: bold;
+        color: black;
+        // border: 3px solid white;
+        background-color: white;
+        cursor: pointer;
+
+        :hover {
+            border: 3px solid black;
+        }
     }
 }
