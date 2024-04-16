@@ -1,23 +1,26 @@
 // import PostImgImg from "../../img/misaemococo.png"
+import { Link } from "react-router-dom";
 import "../../style/post/postList.scss"
 
 interface postListProps {
     postTitle: string;
     imgUrl: string;
+    postId: Number;
 }
 
-const PostList:React.FC<postListProps> = ({postTitle, imgUrl}) => {
+const PostList:React.FC<postListProps> = ({postId, postTitle, imgUrl}) => {
     return (
         <>
-            <div className="postList-box">
-                <div className="postList-text">
-                    <h2>{postTitle}</h2>
+            <Link to={`/postdetail/${postId}`}>
+                <div className="postList-box">
+                    <div className="postList-text">
+                        <h2>{`${postId}. ${postTitle}`}</h2>
+                    </div>
+                    <div className="postList-img-box">
+                        <img src={imgUrl} alt="" />
+                    </div>
                 </div>
-
-                <div className="postList-img-box">
-                    <img src={imgUrl} alt="" />
-                </div>
-            </div>
+            </Link>
         </>
     )
 }
