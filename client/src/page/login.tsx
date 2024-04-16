@@ -52,7 +52,7 @@ const Login = () => {
                 <LogoImg />
                 <Title mainText="L O G I N" subText="로그인" />
                 <Input
-                    type="email" // 입력 필드를 이메일 형식으로 지정
+                    type="email"
                     placeholder="이메일 아이디"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

@@ -6,17 +6,17 @@ import axios from "axios";
 const PostRight = () => {
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-        const loadPosts = async () => {
-            try {
-                const response = await axios.get('http://localhost:1111');
-                setPosts(response.data)
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        loadPosts();
-    }, [])
+    // useEffect(() => {
+    //     const loadPosts = async () => {
+    //         try {
+    //             const response = await axios.get('http://localhost:1111');
+    //             setPosts(response.data)
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+    //     loadPosts();
+    // }, [])
 
     return (
         <>

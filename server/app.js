@@ -43,7 +43,9 @@ app.use('/api', authMiddleware);
 
 // 인증이 필요한 게시물 관련 경로
 app.use('/api/posts', postsRoutes);
-
+app.get('/', (req, res) => {
+    res.send('Welcome to my MYun API');
+});
 const PORT = process.env.PORT || 49152;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
