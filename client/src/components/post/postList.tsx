@@ -1,4 +1,3 @@
-// import PostImgImg from "../../img/misaemococo.png"
 import { Link } from "react-router-dom";
 import "../../style/post/postList.scss"
 

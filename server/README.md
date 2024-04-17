@@ -8,11 +8,13 @@ MYUN_SJ backend/
 │   ├── users.js
 │   └── posts.js
 ├── /controllers
+│   ├── commentsController 
 │   ├── usersController.js
 │   └── postsController.js
 ├── /middlewares
 │   └── authMiddleware.js
-└── /public
-    ├── /images
-    ├── /javascripts
-    └── /stylesheets
+├── /models
+│   ├── comment.js
+│   ├── post.js
+│   └── user.js
+└── /uploads

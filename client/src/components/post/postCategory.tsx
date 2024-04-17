@@ -1,9 +1,8 @@
 import "../../style/post/postCategory.scss"
-import { Link, useLocation, useNavigate  } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import React, { useState } from 'react';
 
 const PostCategory = () => {
-    // const location = useLocation();
     const navigate = useNavigate();
     const [selectedCategory, setSelectedCategory] = useState("/post");
 

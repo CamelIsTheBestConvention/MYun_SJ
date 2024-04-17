@@ -7,7 +7,7 @@ import { AppComment } from "./AppCommentInterface";
 
 const CommentBox = () => {
     const { postId } = useParams<{ postId?: string }>();
-    const [comments, setComments] = useState<AppComment[]>([]); // 여기를 AppComment로 변경
+    const [comments] = useState<AppComment[]>([]);
     const userToken = localStorage.getItem('userToken');
 
     if (postId === undefined) {

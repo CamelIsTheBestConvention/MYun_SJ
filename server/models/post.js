@@ -34,7 +34,7 @@ Post.init({
 }, {
     sequelize,
     modelName: 'Post',
-    timestamps: false // 타임스탬프 컬럼 비활성화
+    timestamps: false
 });
 
 

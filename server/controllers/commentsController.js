@@ -1,7 +1,6 @@
 const Comment = require('../models/comment');
 
 const commentsController = {
-    // 댓글 생성
     createComment: async (req, res) => {
         const { postId } = req.params;
         const { content, userNickname } = req.body;

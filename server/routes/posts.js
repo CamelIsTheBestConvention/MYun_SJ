@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const postsController = require('../controllers/postsController');
-const commentsController = require('../controllers/commentsController.js'); // 댓글 컨트롤러 추가
+const commentsController = require('../controllers/commentsController.js');
 
 // 모든 게시글을 가져오는 GET 요청
 router.get('/', postsController.getAllPosts);

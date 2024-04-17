@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 
-const jwt = require('jsonwebtoken'); // JWT를 위한 패키지 추가
+const jwt = require('jsonwebtoken');
 
 const sequelize = require('./config/db');
 
@@ -13,7 +13,7 @@ const Post = require('./models/post');
 const postsRoutes = require('./routes/posts');
 const usersRoutes = require('./routes/users');
 
-const authMiddleware = require('./middlewares/authMiddleware'); // JWT 검증 미들웨어 사용
+const authMiddleware = require('./middlewares/authMiddleware');
 
 // CORS 정책 설정: 특정 도메인에서만 요청을 허용
 const corsOptions = {
